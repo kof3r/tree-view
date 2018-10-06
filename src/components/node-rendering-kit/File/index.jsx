@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-import { NodeDisplay } from '../NodeDisplay';
+import { Node } from '../Node';
 
 const GENERIC_FILE_ICON = 'file-empty';
 
@@ -10,12 +10,12 @@ const typeIcons = {
   'jpg': 'file-picture',
 }
 
-export const FileDisplay = ({ node }) => {
+export const File = ({ node }) => {
   const { name, fileType } = node;
   const icon = (fileType in typeIcons) ? typeIcons[fileType] : GENERIC_FILE_ICON
 
   return (
-    <NodeDisplay
+    <Node
       className='File'
       name={name}
       icon={icon}

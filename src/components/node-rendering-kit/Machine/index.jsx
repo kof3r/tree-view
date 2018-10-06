@@ -1,27 +1,27 @@
 
 import React from 'react';
-import { NodeDisplay } from '../NodeDisplay';
-import { Progress } from '../Progress';
+import { Node } from '../Node';
+import { Progress } from '../../Progress';
 
 import './MachineDisplay.scss';
 
-export const MachineDisplay = ({ node }) => (
-  <NodeDisplay
+export const Machine = ({ node }) => (
+  <Node
     className='Machine'
     name={node.id}
     icon='display'
   />
 );
 
-export const DatabaseDisplay = ({ node }) => (
-  <NodeDisplay
+export const Database = ({ node }) => (
+  <Node
     className='Database'
     name={node.id}
     icon='database'
   />
 );
 
-export const DriveDisplay = ({ node }) => {
+export const Drive = ({ node }) => {
   let fill = 'high';
   if (node.fill < 0.8) {
     fill = 'medium';
@@ -30,18 +30,18 @@ export const DriveDisplay = ({ node }) => {
     fill = 'low';
   }
   return (
-    <NodeDisplay
+    <Node
       className='Drive'
       name={node.id}
       icon='drive'
     >
       <Progress progress={node.fill} className={fill}/>
-    </NodeDisplay>
+    </Node>
   );
 }
 
-export const PrinterDisplay = ({ node }) => (
-  <NodeDisplay
+export const Printer = ({ node }) => (
+  <Node
     className='Printer'
     name={node.id}
     icon='printer'

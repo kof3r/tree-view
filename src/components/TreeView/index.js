@@ -31,9 +31,9 @@ export class TreeView extends Component {
     const { expanded } = this.state;
     if (!this.hasChildren || !expanded) return null;
 
-    const { renderers } = this.props;
+    const { renderingKit } = this.props;
 
-    return <ul className='children'>{this.children.map(child => <TreeView key={child.id} node={child} renderers={renderers} />)}</ul>;
+    return <ul className='children'>{this.children.map(child => <TreeView key={child.id} node={child} renderingKit={renderingKit} />)}</ul>;
   }
   get className() {
     return classnames(
@@ -44,9 +44,9 @@ export class TreeView extends Component {
     )
   }
   renderNode() {
-    const { node, renderers } = this.props;
+    const { node, renderingKit } = this.props;
     const { type, name } = node;
-    return (type in renderers) ? renderers[type]({ node }) : <span>{name}</span>;
+    return (type in renderingKit) ? renderingKit[type]({ node }) : <span>{name}</span>;
   }
   render() {
     const { expanded } = this.state;

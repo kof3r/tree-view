@@ -1,5 +1,3 @@
 
 export * from './TreeView';
-export * from './DirectoryDisplay';
-export * from './FileDisplay';
-export * from './MachineDisplay';
+export * from './node-rendering-kit';

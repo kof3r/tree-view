@@ -2,11 +2,11 @@
 import React from 'react';
 import classnames from 'classnames';
 
-import { Icon } from '../Icon';
+import { Icon } from '../../Icon';
 
 import './Node.scss';
 
-export const NodeDisplay = ({ className, icon, name, children, ...props }) => {
+export const Node = ({ className, icon, name, children, ...props }) => {
   return (
     <span className={classnames('Node', className)} {...props}>
       <Icon icon={icon}/>

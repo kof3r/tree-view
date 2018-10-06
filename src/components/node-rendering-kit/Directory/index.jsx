@@ -1,11 +1,11 @@
 
 import React from 'react';
-import { NodeDisplay } from '../NodeDisplay';
+import { Node } from '../Node';
 
 import './DirectoryDisplay.scss';
 
-export const DirectoryDisplay = ({ node }) => (
-  <NodeDisplay
+export const Directory = ({ node }) => (
+  <Node
     className='Directory'
     name={node.id}
     icon='folder-open'
