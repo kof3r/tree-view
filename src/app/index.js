@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { hot } from 'react-hot-loader';
 
-import { types as artefactTypes } from '../models/artefact';
+import { types as nodeTypes } from '../models/node';
 import { File, Directory, Machine, Database, Printer, Drive } from '../models';
 import { TreeView, DirectoryDisplay, FileDisplay, MachineDisplay, PrinterDisplay, DriveDisplay, DatabaseDisplay } from '../components';
 
@@ -74,12 +74,12 @@ const root = new Directory(
 );
 
 const renderers = {
-  [artefactTypes.DIRECTORY]: DirectoryDisplay,
-  [artefactTypes.FILE]: FileDisplay,
-  [artefactTypes.MACHINE]: MachineDisplay,
-  [artefactTypes.DRIVE]: DriveDisplay,
-  [artefactTypes.DATABASE]: DatabaseDisplay,
-  [artefactTypes.PRINTER]: PrinterDisplay,
+  [nodeTypes.DIRECTORY]: DirectoryDisplay,
+  [nodeTypes.FILE]: FileDisplay,
+  [nodeTypes.MACHINE]: MachineDisplay,
+  [nodeTypes.DRIVE]: DriveDisplay,
+  [nodeTypes.DATABASE]: DatabaseDisplay,
+  [nodeTypes.PRINTER]: PrinterDisplay,
 }
 
 class App extends Component {
@@ -87,7 +87,7 @@ class App extends Component {
     return (
       <div className='App'>
         <h1>Hello, World!</h1>
-        <TreeView entity={root} renderers={renderers}/>
+        <TreeView node={root} renderers={renderers}/>
       </div>
     );
   }

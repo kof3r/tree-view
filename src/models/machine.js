@@ -1,5 +1,5 @@
 
-import { Artefact, types } from './artefact';
+import { Node, types } from './node';
 import { Directory } from './directory';
 
 export class Machine extends Directory {
@@ -10,7 +10,7 @@ export class Machine extends Directory {
   }
 }
 
-export class Drive extends Artefact {
+export class Drive extends Node {
   constructor(id, fill = 0) {
     super(types.DRIVE, id);
 
@@ -18,13 +18,13 @@ export class Drive extends Artefact {
   }
 }
 
-export class Database extends Artefact {
+export class Database extends Node {
   constructor(id) {
     super(types.DATABASE, id);
   }
 }
 
-export class Printer extends Artefact {
+export class Printer extends Node {
   constructor(id) {
     super(types.PRINTER, id);
   }

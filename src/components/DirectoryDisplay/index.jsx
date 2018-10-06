@@ -1,11 +1,11 @@
 
 import React from 'react';
-import { ArtefactDisplay } from '../ArtefactDisplay';
+import { NodeDisplay } from '../NodeDisplay';
 
 import './DirectoryDisplay.scss';
 
 export const DirectoryDisplay = ({ artefact }) => (
-  <ArtefactDisplay
+  <NodeDisplay
     className='Directory'
     name={artefact.id}
     icon='folder-open'

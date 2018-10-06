@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-import { ArtefactDisplay } from '../ArtefactDisplay';
+import { NodeDisplay } from '../NodeDisplay';
 
 const GENERIC_FILE_ICON = 'file-empty';
 
@@ -12,10 +12,10 @@ const typeIcons = {
 
 export const FileDisplay = ({ artefact }) => {
   const { name, fileType } = artefact;
-  const icon = fileType in typeIcons ? typeIcons[fileType] : GENERIC_FILE_ICON
+  const icon = (fileType in typeIcons) ? typeIcons[fileType] : GENERIC_FILE_ICON
 
   return (
-    <ArtefactDisplay
+    <NodeDisplay
       className='File'
       name={name}
       icon={icon}

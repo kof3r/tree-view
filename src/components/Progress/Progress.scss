@@ -3,7 +3,8 @@
   display: inline-block;
   height: 16px;
   line-height: 16px;
-  border: solid gray 1px;
+  border: solid black;
+  border-width: 2px 1px;
   width: 60px;
   text-align: center;
   font-size: 12px;
@@ -14,22 +15,39 @@
     top: 0;
     bottom: 0;
     left: 0;
-    z-index: -1;
+    right: 0;
+    text-align: left;
+    background-color: black;
+
+    .tick {
+      box-sizing: border-box;
+      display: inline-block;
+      width: 10%;
+      height: 100%;
+      border: solid black;
+      border-width: 0 0.5px;
+    }
   }
 
   &.low {
     .filler {
-      background-color: lightgreen;
+      .tick {
+        background-color: lightgreen;
+      }
     }
   }
   &.medium {
     .filler {
-      background-color: yellow;
+      .tick {
+        background-color: yellow;
+      }
     }
   }
   &.high {
     .filler {
-      background-color: red;
+      .tick {
+        background-color: red;
+      }
     }
   }
 }

@@ -1,7 +1,7 @@
 
-import { Artefact, types } from './artefact';
+import { Node, types } from './node';
 
-export class File extends Artefact {
+export class File extends Node {
   constructor(id, fileType) {
     super(types.FILE, id);
 

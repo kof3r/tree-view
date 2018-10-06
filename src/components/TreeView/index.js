@@ -17,11 +17,11 @@ function sortChildren(e1, e2) {
 export class TreeView extends Component {
   state = { expanded: false };
   get children() {
-    const { entity: { children = [] } } = this.props;
+    const { node: { children = [] } } = this.props;
     return [...children].sort(sortChildren);
   }
   get hasChildren() {
-    return !!this.props.entity.children;
+    return !!this.props.node.children;
   }
   toggleExpand = () => {
     const { expanded } = this.state;
@@ -33,7 +33,7 @@ export class TreeView extends Component {
 
     const { renderers } = this.props;
 
-    return <ul className='children'>{this.children.map(child => <TreeView key={child.id} entity={child} renderers={renderers} />)}</ul>;
+    return <ul className='children'>{this.children.map(child => <TreeView key={child.id} node={child} renderers={renderers} />)}</ul>;
   }
   get className() {
     return classnames(
@@ -44,9 +44,9 @@ export class TreeView extends Component {
     )
   }
   renderArtefact() {
-    const { entity, renderers } = this.props;
-    const { type, name } = entity;
-    return (type in renderers) ? renderers[type]({ artefact: entity }) : <span>{name}</span>;
+    const { node, renderers } = this.props;
+    const { type, name } = node;
+    return (type in renderers) ? renderers[type]({ artefact: node }) : <span>{name}</span>;
   }
   render() {
     const { expanded } = this.state;

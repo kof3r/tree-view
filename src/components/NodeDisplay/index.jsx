@@ -4,11 +4,11 @@ import classnames from 'classnames';
 
 import { Icon } from '../Icon';
 
-import './Artefact.scss';
+import './Node.scss';
 
-export const ArtefactDisplay = ({ className, icon, name, children, ...props }) => {
+export const NodeDisplay = ({ className, icon, name, children, ...props }) => {
   return (
-    <span className={classnames('Artefact', className)} {...props}>
+    <span className={classnames('Node', className)} {...props}>
       <Icon icon={icon}/>
       <span className='name'>{name}</span>
       {children}

@@ -1,12 +1,12 @@
 
 import React from 'react';
-import { ArtefactDisplay } from '../ArtefactDisplay';
+import { NodeDisplay } from '../NodeDisplay';
 import { Progress } from '../Progress';
 
 import './MachineDisplay.scss';
 
 export const MachineDisplay = ({ artefact }) => (
-  <ArtefactDisplay
+  <NodeDisplay
     className='Machine'
     name={artefact.id}
     icon='display'
@@ -14,7 +14,7 @@ export const MachineDisplay = ({ artefact }) => (
 );
 
 export const DatabaseDisplay = ({ artefact }) => (
-  <ArtefactDisplay
+  <NodeDisplay
     className='Database'
     name={artefact.id}
     icon='database'
@@ -30,18 +30,18 @@ export const DriveDisplay = ({ artefact }) => {
     fill = 'low';
   }
   return (
-    <ArtefactDisplay
+    <NodeDisplay
       className='Drive'
       name={artefact.id}
       icon='drive'
     >
       <Progress progress={artefact.fill} className={fill}/>
-    </ArtefactDisplay>
+    </NodeDisplay>
   );
 }
 
 export const PrinterDisplay = ({ artefact }) => (
-  <ArtefactDisplay
+  <NodeDisplay
     className='Printer'
     name={artefact.id}
     icon='printer'
