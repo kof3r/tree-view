@@ -1,0 +1,36 @@
+
+.TreeView {
+  list-style: none;
+
+  >.name {
+    cursor: default;
+    line-height: 24px;
+
+    >i.icon {
+      font-size: 16px;
+      vertical-align: middle;
+      margin-right: 8px;
+      margin-left: -7px;
+      font-weight: bold;
+    }
+
+    &:hover {
+      >i.icon {
+        color: blueviolet;
+      }
+    }
+  }
+
+  .children {
+    list-style: none;
+    border-left: solid rgba(0, 0, 0, 0.2) 1px;
+    margin: 0;
+    padding-left: 40px;
+  }
+
+  &.expandable {
+    >.name {
+      cursor: pointer;
+    }
+  }
+}
