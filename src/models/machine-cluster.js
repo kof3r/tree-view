@@ -2,6 +2,12 @@
 import { nodeTypes } from '../constants';
 import { Node, Group } from './base';
 
+export class MachineCluster extends Group {
+  constructor(id, children) {
+    super(nodeTypes.MACHINE_CLUSTER, id, children);
+  }
+}
+
 export class Machine extends Group {
   constructor(id, children) {
     super(nodeTypes.MACHINE, id, children);

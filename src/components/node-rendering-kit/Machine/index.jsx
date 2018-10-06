@@ -5,6 +5,14 @@ import { Progress } from '../../Progress';
 
 import './MachineDisplay.scss';
 
+export const MachineCluster = ({ node }) => (
+  <Node
+    className='MachineCluster'
+    name={node.id}
+    icon='cubes'
+  />
+);
+
 export const Machine = ({ node }) => (
   <Node
     className='Machine'

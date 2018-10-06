@@ -1,5 +1,5 @@
 
-import { File, Directory, Machine, Database, Printer, Drive } from '../models';
+import { File, Directory, Machine, MachineCluster, Database, Printer, Drive } from '../models';
 
 export const someFileSystem = new Directory(
   'root',
@@ -21,8 +21,8 @@ export const someFileSystem = new Directory(
             new File('ljubo', 'jpg'),
             new File('todos', 'txt'),
             new File('main', 'go'),
-            new Directory(
-              'remotes',
+            new MachineCluster(
+              'aws-cluster',
               [
                 new Machine(
                   'centrala',

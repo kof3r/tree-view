@@ -24,6 +24,9 @@ i {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.ico-cubes:before {
+  content: "\f1b3";
+}
 .ico-printer:before {
   content: "\e954";
 }
