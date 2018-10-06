@@ -5,45 +5,45 @@ import { Progress } from '../Progress';
 
 import './MachineDisplay.scss';
 
-export const MachineDisplay = ({ artefact }) => (
+export const MachineDisplay = ({ node }) => (
   <NodeDisplay
     className='Machine'
-    name={artefact.id}
+    name={node.id}
     icon='display'
   />
 );
 
-export const DatabaseDisplay = ({ artefact }) => (
+export const DatabaseDisplay = ({ node }) => (
   <NodeDisplay
     className='Database'
-    name={artefact.id}
+    name={node.id}
     icon='database'
   />
 );
 
-export const DriveDisplay = ({ artefact }) => {
+export const DriveDisplay = ({ node }) => {
   let fill = 'high';
-  if (artefact.fill < 0.8) {
+  if (node.fill < 0.8) {
     fill = 'medium';
   }
-  if (artefact.fill < 0.5) {
+  if (node.fill < 0.5) {
     fill = 'low';
   }
   return (
     <NodeDisplay
       className='Drive'
-      name={artefact.id}
+      name={node.id}
       icon='drive'
     >
-      <Progress progress={artefact.fill} className={fill}/>
+      <Progress progress={node.fill} className={fill}/>
     </NodeDisplay>
   );
 }
 
-export const PrinterDisplay = ({ artefact }) => (
+export const PrinterDisplay = ({ node }) => (
   <NodeDisplay
     className='Printer'
-    name={artefact.id}
+    name={node.id}
     icon='printer'
   />
 );

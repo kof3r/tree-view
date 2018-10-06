@@ -43,19 +43,19 @@ export class TreeView extends Component {
       }
     )
   }
-  renderArtefact() {
+  renderNode() {
     const { node, renderers } = this.props;
     const { type, name } = node;
-    return (type in renderers) ? renderers[type]({ artefact: node }) : <span>{name}</span>;
+    return (type in renderers) ? renderers[type]({ node }) : <span>{name}</span>;
   }
   render() {
     const { expanded } = this.state;
 
     return (
       <li className={this.className}>
-        <div className='name' onClick={this.toggleExpand}>
+        <div className='node-container' onClick={this.toggleExpand}>
           {this.hasChildren && <IconExpand expanded={expanded}/>}
-          {this.renderArtefact()}
+          {this.renderNode()}
         </div>
         {this.renderChildren()}
       </li>

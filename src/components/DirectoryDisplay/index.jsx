@@ -4,10 +4,10 @@ import { NodeDisplay } from '../NodeDisplay';
 
 import './DirectoryDisplay.scss';
 
-export const DirectoryDisplay = ({ artefact }) => (
+export const DirectoryDisplay = ({ node }) => (
   <NodeDisplay
     className='Directory'
-    name={artefact.id}
+    name={node.id}
     icon='folder-open'
   />
 );

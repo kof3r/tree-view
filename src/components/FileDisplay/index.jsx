@@ -10,8 +10,8 @@ const typeIcons = {
   'jpg': 'file-picture',
 }
 
-export const FileDisplay = ({ artefact }) => {
-  const { name, fileType } = artefact;
+export const FileDisplay = ({ node }) => {
+  const { name, fileType } = node;
   const icon = (fileType in typeIcons) ? typeIcons[fileType] : GENERIC_FILE_ICON
 
   return (
