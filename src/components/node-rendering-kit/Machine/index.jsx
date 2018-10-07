@@ -40,7 +40,7 @@ export const Drive = ({ node }) => {
   return (
     <Node
       className='Drive'
-      name={node.id}
+      name={node.name}
       icon='drive'
     >
       <Progress progress={node.fill} className={fill}/>

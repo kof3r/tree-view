@@ -1,0 +1,79 @@
+{
+  "type": "DIRECTORY",
+  "id": "root",
+  "children": [
+    {
+      "type": "DIRECTORY",
+      "id": "home",
+      "children": [
+        {
+          "type": "DIRECTORY",
+          "id": "kof3r",
+          "children": [
+            {
+              "type": "DIRECTORY",
+              "id": "tree-view",
+              "children": [
+                { "type": "FILE", "id": "index.js" },
+                { "type": "FILE", "id": "TreeView.js" }
+              ]
+            },
+            { "type": "FILE", "id": "kof3r.jpg" },
+            { "type": "FILE", "id": "todos.txt" }
+          ]
+        },
+        {
+          "type": "DIRECTORY",
+          "id": "ljubo",
+          "children": [
+            { "type": "FILE", "id": "ljubo.jpg" },
+            { "type": "FILE", "id": "main.go" },
+            { "type": "FILE", "id": "todos.txt" },
+            {
+              "type": "MACHINE_CLUSTER",
+              "id": "aws-cluster",
+              "children": [
+                {
+                  "type": "MACHINE",
+                  "id": "centrala",
+                  "children": [
+                    { "type": "DRIVE", "id": "C", "data": { "used": 50, "total": 100 } },
+                    { "type": "DRIVE", "id": "D", "data": { "used": 90, "total": 900 } },
+                    { "type": "DATABASE", "id": "MSSQL" },
+                    { "type": "DATABASE", "id": "postgresql" }
+                  ]
+                },
+                {
+                  "type": "MACHINE",
+                  "id": "blagajna-1",
+                  "children": [
+                    { "type": "DRIVE", "id": "C", "data": { "used": 90, "total": 100 } },
+                    { "type": "PRINTER", "id": "printer" }
+                  ]
+                },
+                {
+                  "type": "MACHINE",
+                  "id": "blagajna-2",
+                  "children": [
+                    { "type": "DRIVE", "id": "C", "data": { "used": 40, "total": 100 } },
+                    { "type": "PRINTER", "id": "printer" }
+                  ]
+                },
+                {
+                  "type": "MACHINE",
+                  "id": "blagajna-3",
+                  "children": [
+                    { "type": "DRIVE", "id": "C", "data": { "used": 70, "total": 100 } },
+                    { "type": "PRINTER", "id": "printer" }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        { "type": "FILE", "id": "ramblings.txt" },
+        { "type": "FILE", "id": "awesome-wallpaper.jpg" }
+      ]
+    }
+  ]
+}

@@ -1,35 +1,42 @@
 
 import { nodeTypes } from '../constants';
-import { Node, Group } from './base';
+import { Node } from './base';
 
-export class MachineCluster extends Group {
-  constructor(id, children) {
-    super(nodeTypes.MACHINE_CLUSTER, id, children);
+export class MachineCluster extends Node {
+  constructor(node) {
+    super(nodeTypes.MACHINE_CLUSTER, node);
   }
 }
 
-export class Machine extends Group {
-  constructor(id, children) {
-    super(nodeTypes.MACHINE, id, children);
+export class Machine extends Node {
+  constructor(node) {
+    super(nodeTypes.MACHINE, node);
   }
 }
 
 export class Drive extends Node {
-  constructor(id, fill = 0) {
-    super(nodeTypes.DRIVE, id);
+  constructor(node) {
+    super(nodeTypes.DRIVE, node);
+  }
 
-    this.fill = fill;
+  get name() {
+    return `${this.id}:/`;
+  }
+
+  get fill() {
+    const { used = 0, total } = this.data;
+    return total ? (used / total) : 0;
   }
 }
 
 export class Database extends Node {
-  constructor(id) {
-    super(nodeTypes.DATABASE, id);
+  constructor(node) {
+    super(nodeTypes.DATABASE, node);
   }
 }
 
 export class Printer extends Node {
-  constructor(id) {
-    super(nodeTypes.PRINTER, id);
+  constructor(node) {
+    super(nodeTypes.PRINTER, node);
   }
 }

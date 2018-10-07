@@ -1,21 +1,23 @@
 
 import { nodeTypes } from '../constants';
-import { Node, Group } from './base';
+import { fileExtension } from '../util';
 
-export class Directory extends Group {
-  constructor(id, children) {
-    super(nodeTypes.DIRECTORY, id, children);
+import { Node } from './base';
+
+export class Directory extends Node {
+  constructor(node) {
+    super(nodeTypes.DIRECTORY, node);
   }
 }
 
 export class File extends Node {
-  constructor(id, fileType) {
-    super(nodeTypes.FILE, id);
+  constructor(node) {
+    super(nodeTypes.FILE, node);
 
-    this.fileType = fileType;
+    this.data.fileType = fileExtension(node.id);
   }
 
-  get name() {
-    return `${this.id}.${this.fileType}`;
+  get fileType() {
+    return this.data.fileType;
   }
 }
