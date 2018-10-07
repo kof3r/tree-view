@@ -7,4 +7,6 @@ export const nodeTypes = {
   MACHINE: 'MACHINE',
   MACHINE_CLUSTER: 'MACHINE_CLUSTER',
   PRINTER: 'PRINTER',
-}
+};
+
+export const NODE_PATH_DELIMITER = '/';

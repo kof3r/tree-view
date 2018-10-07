@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
 
+import { NODE_PATH_DELIMITER } from '../../constants';
 import { Icon } from '../Icon';
 
 import './TreeView.scss';
@@ -24,7 +25,7 @@ export class TreeViewStateless extends Component {
   }
   get fullNodePath() {
     const { node, path } = this.props;
-    return `${path}/${node.id}`;
+    return `${path}${NODE_PATH_DELIMITER}${node.id}`;
   }
   get onNodeClick() {
     const { node, onNodeClick } = this.props;
