@@ -6,11 +6,11 @@ import { Icon } from '../../Icon';
 
 import './Node.scss';
 
-export const Node = ({ className, icon, name, children, ...props }) => {
+export const Node = ({ className, icon, node, children, ...props }) => {
   return (
     <span className={classnames('Node', className)} {...props}>
       <Icon icon={icon}/>
-      <span className='name'>{name}</span>
+      <span className='name'>{node.name}</span>
       {children}
     </span>
   );

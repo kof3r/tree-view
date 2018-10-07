@@ -7,7 +7,7 @@ import './DirectoryDisplay.scss';
 export const Directory = ({ node }) => (
   <Node
     className='Directory'
-    name={node.id}
+    node={node}
     icon='folder-open'
   />
 );

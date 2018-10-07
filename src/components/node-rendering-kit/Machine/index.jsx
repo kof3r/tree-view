@@ -8,7 +8,7 @@ import './MachineDisplay.scss';
 export const MachineCluster = ({ node }) => (
   <Node
     className='MachineCluster'
-    name={node.id}
+    node={node}
     icon='cubes'
   />
 );
@@ -16,7 +16,7 @@ export const MachineCluster = ({ node }) => (
 export const Machine = ({ node }) => (
   <Node
     className='Machine'
-    name={node.id}
+    node={node}
     icon='display'
   />
 );
@@ -24,7 +24,7 @@ export const Machine = ({ node }) => (
 export const Database = ({ node }) => (
   <Node
     className='Database'
-    name={node.id}
+    node={node}
     icon='database'
   />
 );
@@ -40,7 +40,7 @@ export const Drive = ({ node }) => {
   return (
     <Node
       className='Drive'
-      name={node.name}
+      node={node}
       icon='drive'
     >
       <Progress progress={node.fill} className={fill}/>
@@ -51,7 +51,7 @@ export const Drive = ({ node }) => {
 export const Printer = ({ node }) => (
   <Node
     className='Printer'
-    name={node.id}
+    node={node}
     icon='printer'
   />
 );

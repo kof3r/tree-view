@@ -11,13 +11,13 @@ const typeIcons = {
 }
 
 export const File = ({ node }) => {
-  const { name, fileType } = node;
+  const { fileType } = node;
   const icon = (fileType in typeIcons) ? typeIcons[fileType] : GENERIC_FILE_ICON
 
   return (
     <Node
       className='File'
-      name={name}
+      node={node}
       icon={icon}
     />
   );
