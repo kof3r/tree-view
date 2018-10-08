@@ -7,7 +7,8 @@ import { Icon } from '../Icon';
 
 import './TreeView.scss';
 
-const IconExpand = ({ expanded }) => <Icon className='expander' icon={`cheveron-${expanded ? 'down' : 'right'}`}/>
+const IconExpand = ({ expanded }) => <Icon className='expander' icon={`cheveron-${expanded ? 'down' : 'right'}`}/>;
+const DefaultNode = ({ node }) => <span>{node.name}</span>;
 
 export class TreeViewStateless extends Component {
   onNodeDragStart = () => {
@@ -41,13 +42,6 @@ export class TreeViewStateless extends Component {
       onNodeDragEnter(path);
     }
   }
-  onKeyDown = evt => {
-    const { onKeyDown } = this.props;
-    if (onKeyDown) {
-      evt.preventDefault();
-      onKeyDown(evt);
-    }
-  }
   get children() {
     const { node: { childList = [] }, sortChildren } = this.props;
     const children = [...childList];
@@ -65,7 +59,7 @@ export class TreeViewStateless extends Component {
   }
   onNodeClick = () => {
     const { node, onNodeClick } = this.props;
-    return onNodeClick(node, this.nodePath);
+    onNodeClick(node, this.nodePath);
   }
   get isNodeExpanded() {
     const { node, isNodeExpanded } = this.props;
@@ -95,8 +89,9 @@ export class TreeViewStateless extends Component {
   }
   renderNode() {
     const { node, renderingKit } = this.props;
-    const { type, name } = node;
-    return (type in renderingKit) ? renderingKit[type]({ node }) : <span>{name}</span>;
+    const { type } = node;
+    const Node = (type in renderingKit) ? renderingKit[type] : DefaultNode;
+    return <Node node={node}/>;
   }
   render() {
     return (
@@ -109,8 +104,6 @@ export class TreeViewStateless extends Component {
           onDragStart={this.onNodeDragStart}
           onDragOver={this.onDragOver}
           onDrop={this.onNodeDrop}
-          tabIndex="0"
-          onKeyDown={this.onKeyDown}
         >
           {this.hasChildren && <IconExpand expanded={this.isNodeExpanded}/>}
           {this.renderNode()}

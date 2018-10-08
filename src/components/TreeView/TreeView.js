@@ -73,6 +73,7 @@ export class TreeView extends Component {
 
   onKeyDown = (evt) => {
     const { selectedPath } = this.state;
+    evt.preventDefault();
     switch (evt.key) {
       case 'ArrowUp': return this.shiftSelectedNode(-1);
       case 'ArrowDown': return this.shiftSelectedNode(1);
@@ -122,19 +123,20 @@ export class TreeView extends Component {
     const { destinationPath, selectedPath } = this.state;
 
     return (
-      <TreeViewStateless
-        {...this.props}
-        highlightedPath={destinationPath}
-        isNodeExpanded={this.isNodeExpanded}
-        onNodeClick={this.toggleExpand}
-        onNodeDragEnter={this.setDragDestinationPath}
-        onNodeDragStart={this.setDragSourcePath}
-        onNodeDrop={this.moveNode}
-        path={[]}
-        selectedPath={selectedPath}
-        sortChildren={sortChildren}
-        onKeyDown={this.onKeyDown}
-      />
+      <div className="TreeViewContainer" tabIndex="0" onKeyDown={this.onKeyDown}>
+        <TreeViewStateless
+          {...this.props}
+          highlightedPath={destinationPath}
+          isNodeExpanded={this.isNodeExpanded}
+          onNodeClick={this.toggleExpand}
+          onNodeDragEnter={this.setDragDestinationPath}
+          onNodeDragStart={this.setDragSourcePath}
+          onNodeDrop={this.moveNode}
+          path={[]}
+          selectedPath={selectedPath}
+          sortChildren={sortChildren}
+        />
+      </div>
     );
   }
 }
