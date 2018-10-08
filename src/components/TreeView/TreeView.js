@@ -10,6 +10,7 @@ export class TreeView extends Component {
     expandedNodes: {},
     sourcePath: null,
     destinationPath: null,
+    selectedPath: null,
   };
 
   setDragSourcePath = (path) => {
@@ -41,7 +42,7 @@ export class TreeView extends Component {
     } else {
       expandedNodes[path] = true;
     }
-    this.setState({ expandedNodes });
+    this.setState({ expandedNodes, selectedPath: nodePath });
   }
 
   isNodeExpanded = (_, nodePath) => {
@@ -50,7 +51,7 @@ export class TreeView extends Component {
   }
 
   render() {
-    const { destinationPath } = this.state;
+    const { destinationPath, selectedPath } = this.state;
 
     return (
       <TreeViewStateless
@@ -62,6 +63,7 @@ export class TreeView extends Component {
         onNodeClick={this.toggleExpand}
         isNodeExpanded={this.isNodeExpanded}
         highlightedPath={destinationPath}
+        selectedPath={selectedPath}
       />
     );
   }

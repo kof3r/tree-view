@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
 
-import { pathString } from '../../util/path';
+import { equalPaths } from '../../util/path';
 import { Icon } from '../Icon';
 
 import './TreeView.scss';
@@ -62,6 +62,9 @@ export class TreeViewStateless extends Component {
     const { node, isNodeExpanded } = this.props;
     return isNodeExpanded(node, this.nodePath);
   }
+  equalPath(path) {
+    return equalPaths(this.nodePath, path);
+  }
   renderChildren() {
     if (!this.hasChildren || !this.isNodeExpanded) return null;
 
@@ -70,13 +73,14 @@ export class TreeViewStateless extends Component {
     );
   }
   get className() {
-    const { className, highlightedPath } = this.props;
+    const { className, highlightedPath, selectedPath } = this.props;
     return classnames(
       'TreeView',
       className,
       {
         'expandable': this.hasChildren,
-        'highlighted': highlightedPath && (pathString(highlightedPath) === pathString(this.nodePath))
+        'highlighted': highlightedPath && this.equalPath(highlightedPath),
+        'selected': selectedPath && this.equalPath(selectedPath),
       }
     )
   }
