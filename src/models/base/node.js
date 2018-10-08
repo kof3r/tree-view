@@ -16,6 +16,14 @@ export class Node {
     this.data = data || {};
   }
 
+  get hasChildren() {
+    return !!this.children;
+  }
+
+  get childList() {
+    return this.children ? Object.values(this.children) : undefined;
+  }
+
   get name() {
     return this.id;
   }

@@ -1,7 +1,7 @@
 
 import { createSelector } from 'reselect';
-import { parseNodeTree } from '../../parser';
+import { modelNodeTree } from '../../parser';
 
 const $fileSystem = state => state.fileSystem;
 
-export const $root = createSelector($fileSystem, fileSystem => parseNodeTree(fileSystem));
+export const $root = createSelector($fileSystem, fileSystem => modelNodeTree(fileSystem));

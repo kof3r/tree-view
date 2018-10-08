@@ -34,4 +34,8 @@
       cursor: pointer;
     }
   }
+
+  &.highlighted {
+    background-color: transparentize(blue, 0.95);
+  }
 }

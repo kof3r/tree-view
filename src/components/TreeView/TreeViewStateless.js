@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
 
-import { NODE_PATH_DELIMITER } from '../../constants';
+import { pathString } from '../../util/path';
 import { Icon } from '../Icon';
 
 import './TreeView.scss';
@@ -16,37 +16,67 @@ function sortChildren(e1, e2) {
 }
 
 export class TreeViewStateless extends Component {
+  onDragStart = () => {
+    const { onDragStart } = this.props;
+    onDragStart(this.nodePath);
+  }
+  onDragOver = (evt) => {
+    evt.preventDefault();
+    evt.stopPropagation();
+  }
+  onDrop = () => {
+    const { moveNode } = this.props;
+    const fullPath = this.nodePath;
+    if (!this.hasChildren) {
+      fullPath.pop();
+    }
+    moveNode(fullPath);
+  }
+  onDragEnter = (e) => {
+    e.nativeEvent.stopImmediatePropagation();
+    const { onDragEnter } = this.props;
+    if (onDragEnter) {
+      const path = this.nodePath;
+      if (!this.hasChildren) {
+        path.pop();
+      }
+      onDragEnter(path);
+    }
+  }
   get children() {
-    const { node: { children = [] } } = this.props;
-    return [...children].sort(sortChildren);
+    const { node: { childList = [] } } = this.props;
+    return [...childList].sort(sortChildren);
   }
   get hasChildren() {
-    return !!this.props.node.children;
+    return this.props.node.hasChildren;
   }
-  get fullNodePath() {
+  get nodePath() {
     const { node, path } = this.props;
-    return `${path}${NODE_PATH_DELIMITER}${node.id}`;
+    return [...path, node.id];
   }
   get onNodeClick() {
     const { node, onNodeClick } = this.props;
-    return () => onNodeClick(node, this.fullNodePath);
+    return () => onNodeClick(node, this.nodePath);
   }
   get isNodeExpanded() {
     const { node, isNodeExpanded } = this.props;
-    return isNodeExpanded(node, this.fullNodePath);
+    return isNodeExpanded(node, this.nodePath);
   }
   renderChildren() {
     if (!this.hasChildren || !this.isNodeExpanded) return null;
 
     return (
-      <ul className='children'>{this.children.map(child => <TreeViewStateless key={child.id} {...this.props} path={this.fullNodePath} node={child} />)}</ul>
+      <ul className='children'>{this.children.map(child => <TreeViewStateless key={child.id} {...this.props} path={this.nodePath} node={child} />)}</ul>
     );
   }
   get className() {
+    const { className, highlightedPath } = this.props;
     return classnames(
       'TreeView',
+      className,
       {
         'expandable': this.hasChildren,
+        'highlighted': highlightedPath && (pathString(highlightedPath) === pathString(this.nodePath))
       }
     )
   }
@@ -58,7 +88,7 @@ export class TreeViewStateless extends Component {
   render() {
     return (
       <li className={this.className}>
-        <div className='node-container' onClick={this.onNodeClick}>
+        <div draggable className='node-container' onClick={this.onNodeClick} onDragEnter={this.onDragEnter} onDragStart={this.onDragStart} onDragOver={this.onDragOver} onDrop={this.onDrop}>
           {this.hasChildren && <IconExpand expanded={this.isNodeExpanded}/>}
           {this.renderNode()}
         </div>

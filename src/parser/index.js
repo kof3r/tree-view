@@ -14,11 +14,22 @@ const constructors = {
 
 export function parseNodeTree(rootNode) {
   const node = { ...rootNode };
-  if (node.data) {
-    node.data = JSON.parse(JSON.stringify(node.data))
-  }
+  node.data = node.data ? JSON.parse(JSON.stringify(node.data)) : {};
   if (node.children) {
-    node.children = node.children.map(parseNodeTree);
+    node.children = node.children.reduce((dict, child) => Object.assign(dict, { [child.id]: parseNodeTree(child) }), {});
+  }
+  return node;
+}
+
+export function modelNodeTree(rootNode) {
+  const node = { ...rootNode };
+  node.data = JSON.parse(JSON.stringify(node.data))
+  if (node.children) {
+    const modeledChildren = {};
+    Object.keys(node.children).forEach(id => {
+      modeledChildren[id] = modelNodeTree(node.children[id])
+    });
+    node.children = modeledChildren;
   }
   const Constructor = constructors[node.type];
   return new Constructor(node);
