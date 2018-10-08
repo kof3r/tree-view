@@ -1,10 +1,12 @@
 
 .TreeView {
-  $color-selected: blueviolet;
-  $color-highlight: transparentize(blue, 0.95);
+  $color-accent: blueviolet;
+  $color-selected: black;
+  $color-highlight: transparentize($color-accent, 0.95);
 
   list-style: none;
   font-family: monospace;
+  margin-top: 1px;
 
   >.node-container {
     cursor: default;
@@ -13,38 +15,39 @@
     .Node {
       padding-left: 8px;
       padding-right: 8px;
+      margin-left: 13px;
       border: solid 1px transparent;
-
-      &:hover {
-        background-color: $color-highlight;
-      }
     }
 
     >i.icon {
       font-size: 16px;
       vertical-align: middle;
-      margin-right: 8px;
+      margin-right: 4px;
       margin-left: -7px;
       font-weight: bold;
     }
 
     &:hover {
       >i.icon {
-        color: $color-selected;
+        color: $color-accent;
       }
     }
   }
 
-  .children {
+  >.children {
     list-style: none;
     border-left: solid rgba(0, 0, 0, 0.2) 1px;
     margin: 0;
-    padding-left: 40px;
+    padding-left: 28px;
   }
 
   &.expandable {
     >.node-container {
       cursor: pointer;
+
+      .Node {
+        margin-left: 0px;
+      }
     }
   }
 
