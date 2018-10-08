@@ -42,6 +42,9 @@ function moveNode(state, { source, destination }) {
   if (pathContainsPath(source, destination)) return state;
 
   const node = findNode(state, source);
+  const existingNodeInDestination = findNode(state, [...destination, node.id])
+  if (!!existingNodeInDestination) return state;
+  
   const nextState = removeNode(state, source)
   return addNode(nextState, destination, { ...node });
 }
