@@ -30,7 +30,12 @@ function buildIndexPathMap(pathPrefix, node, expandedNodes) {
 }
 
 export class TreeView extends Component {
-  cache = {}
+  setContainerRef = ref => this.containerRef = ref;
+
+  cache = {
+    indexPathMap: null,
+    pathIndexMap: null,
+  }
 
   state = {
     expandedNodes: {},
@@ -40,10 +45,14 @@ export class TreeView extends Component {
   };
 
   componentWillUpdate(_, state) {
-    const { expandedNodes } = this.state;
-    if (expandedNodes !== state.expandedNodes) {
-      this.cache = {};
+    if (this.state.expandedNodes !== state.expandedNodes) {
+      this.clearPathIndexCache();
     }
+  }
+
+  clearPathIndexCache() {
+    this.cache.indexPathMap = null;
+    this.cache.pathIndexMap = null;
   }
 
   get indexPathMap() {
@@ -65,10 +74,14 @@ export class TreeView extends Component {
   shiftSelectedNode(direction) {
     const { selectedPath } = this.state;
     const { pathIndexMap, indexPathMap } = this;
-    const nodeCount = indexPathMap.length;
-    const currentIndex = pathIndexMap[pathString(selectedPath)];
-    const nextIndex = (nodeCount + currentIndex + direction) % nodeCount;
-    this.setState({ selectedPath: indexPathMap[nextIndex] });
+    if (selectedPath) {
+      const nodeCount = indexPathMap.length;
+      const currentIndex = pathIndexMap[pathString(selectedPath)];
+      const nextIndex = (nodeCount + currentIndex + direction) % nodeCount;
+      this.setState({ selectedPath: indexPathMap[nextIndex] });
+    } else {
+      this.setState({ selectedPath: indexPathMap[0] });
+    }
   }
 
   onKeyDown = (evt) => {
@@ -77,7 +90,8 @@ export class TreeView extends Component {
     switch (evt.key) {
       case 'ArrowUp': return this.shiftSelectedNode(-1);
       case 'ArrowDown': return this.shiftSelectedNode(1);
-      case 'Enter': this.toggleExpand(null, selectedPath);
+      case 'Enter': return this.toggleExpand(null, selectedPath);
+      case 'Escape': return this.setState({ selectedPath: null });
     }
   }
 
@@ -119,11 +133,24 @@ export class TreeView extends Component {
     return pathString(nodePath) in expandedNodes;
   }
 
+  focus = () => {
+    const { containerRef } = this;
+    if (containerRef) {
+      containerRef.focus();
+    }
+  }
+
   render() {
     const { destinationPath, selectedPath } = this.state;
 
     return (
-      <div className="TreeViewContainer" tabIndex="0" onKeyDown={this.onKeyDown}>
+      <div
+        className="TreeViewContainer"
+        ref={this.setContainerRef}
+        tabIndex="0"
+        onKeyDown={this.onKeyDown}
+        onMouseEnter={this.focus}
+      >
         <TreeViewStateless
           {...this.props}
           highlightedPath={destinationPath}
