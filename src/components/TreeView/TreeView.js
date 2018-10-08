@@ -5,13 +5,80 @@ import { equalPaths, pathString, pathContainsPath } from '../../util/path';
 
 import { TreeViewStateless } from './TreeViewStateless';
 
+function sortChildren(e1, e2) {
+  if (e1.children && !e2.children) return -1;
+  if (!e1.children && e2.children) return 1;
+  return e1.name.localeCompare(e2.name); 
+}
+
+function invertIndexPathMap(indexPathMap) {
+  return indexPathMap.reduce((pathIndexMap, path, idx) => Object.assign(pathIndexMap, { [pathString(path)]: idx }), {});
+}
+
+function buildIndexPathMap(pathPrefix, node, expandedNodes) {
+  const path = [...pathPrefix, node.id];
+  const pathMap = [path];
+  if (node.childList && (pathString(path) in expandedNodes)) {
+    for (const child of node.childList.sort(sortChildren)) {
+      const childPathMap = buildIndexPathMap(path, child, expandedNodes);
+      for (const childPath of childPathMap) {
+        pathMap.push(childPath);
+      }
+    }
+  }
+  return pathMap;
+}
+
 export class TreeView extends Component {
+  cache = {}
+
   state = {
     expandedNodes: {},
     sourcePath: null,
     destinationPath: null,
     selectedPath: null,
   };
+
+  componentWillUpdate(_, state) {
+    const { expandedNodes } = this.state;
+    if (expandedNodes !== state.expandedNodes) {
+      this.cache = {};
+    }
+  }
+
+  get indexPathMap() {
+    if (!this.cache.indexPathMap) {
+      const { node } = this.props;
+      const { expandedNodes } = this.state;
+      this.cache.indexPathMap = buildIndexPathMap([], node, expandedNodes)
+    }
+    return this.cache.indexPathMap;
+  }
+
+  get pathIndexMap() {
+    if (!this.cache.pathIndexMap) {
+      this.cache.pathIndexMap = invertIndexPathMap(this.indexPathMap);
+    }
+    return this.cache.pathIndexMap;
+  }
+
+  shiftSelectedNode(direction) {
+    const { selectedPath } = this.state;
+    const { pathIndexMap, indexPathMap } = this;
+    const nodeCount = indexPathMap.length;
+    const currentIndex = pathIndexMap[pathString(selectedPath)];
+    const nextIndex = (nodeCount + currentIndex + direction) % nodeCount;
+    this.setState({ selectedPath: indexPathMap[nextIndex] });
+  }
+
+  onKeyDown = (evt) => {
+    const { selectedPath } = this.state;
+    switch (evt.key) {
+      case 'ArrowUp': return this.shiftSelectedNode(-1);
+      case 'ArrowDown': return this.shiftSelectedNode(1);
+      case 'Enter': this.toggleExpand(null, selectedPath);
+    }
+  }
 
   setDragSourcePath = (path) => {
     this.setState({ sourcePath: path });
@@ -36,13 +103,14 @@ export class TreeView extends Component {
 
   toggleExpand = (_, nodePath) => {
     const { expandedNodes } = this.state;
+    const newExpandedNodes = { ...expandedNodes };
     const path = pathString(nodePath);
     if (path in expandedNodes) {
-      delete expandedNodes[path];
+      delete newExpandedNodes[path];
     } else {
-      expandedNodes[path] = true;
+      newExpandedNodes[path] = true;
     }
-    this.setState({ expandedNodes, selectedPath: nodePath });
+    this.setState({ expandedNodes: newExpandedNodes, selectedPath: nodePath });
   }
 
   isNodeExpanded = (_, nodePath) => {
@@ -64,6 +132,8 @@ export class TreeView extends Component {
         onNodeDrop={this.moveNode}
         path={[]}
         selectedPath={selectedPath}
+        sortChildren={sortChildren}
+        onKeyDown={this.onKeyDown}
       />
     );
   }
