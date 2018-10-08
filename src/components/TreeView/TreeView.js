@@ -56,13 +56,13 @@ export class TreeView extends Component {
     return (
       <TreeViewStateless
         {...this.props}
-        moveNode={this.moveNode}
-        onDragStart={this.setDragSourcePath}
-        onDragEnter={this.setDragDestinationPath}
-        path={[]}
-        onNodeClick={this.toggleExpand}
-        isNodeExpanded={this.isNodeExpanded}
         highlightedPath={destinationPath}
+        isNodeExpanded={this.isNodeExpanded}
+        onNodeClick={this.toggleExpand}
+        onNodeDragEnter={this.setDragDestinationPath}
+        onNodeDragStart={this.setDragSourcePath}
+        onNodeDrop={this.moveNode}
+        path={[]}
         selectedPath={selectedPath}
       />
     );

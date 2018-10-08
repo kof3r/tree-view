@@ -7,7 +7,7 @@ import { Icon } from '../Icon';
 
 import './TreeView.scss';
 
-const IconExpand = ({ expanded }) => <Icon icon={`cheveron-${expanded ? 'down' : 'right'}`}/>
+const IconExpand = ({ expanded }) => <Icon className='expander' icon={`cheveron-${expanded ? 'down' : 'right'}`}/>
 
 function sortChildren(e1, e2) {
   if (e1.children && !e2.children) return -1;
@@ -16,31 +16,35 @@ function sortChildren(e1, e2) {
 }
 
 export class TreeViewStateless extends Component {
-  onDragStart = () => {
-    const { onDragStart } = this.props;
-    onDragStart(this.nodePath);
+  onNodeDragStart = () => {
+    const { onNodeDragStart } = this.props;
+    if (onNodeDragStart) {
+      onNodeDragStart(this.nodePath);
+    }
   }
   onDragOver = (evt) => {
     evt.preventDefault();
     evt.stopPropagation();
   }
-  onDrop = () => {
-    const { moveNode } = this.props;
-    const fullPath = this.nodePath;
-    if (!this.hasChildren) {
-      fullPath.pop();
+  onNodeDrop = () => {
+    const { onNodeDrop } = this.props;
+    if (onNodeDrop) {
+      const fullPath = this.nodePath;
+      if (!this.hasChildren) {
+        fullPath.pop();
+      }
+      onNodeDrop(fullPath);
     }
-    moveNode(fullPath);
   }
-  onDragEnter = (e) => {
+  onNodeDragEnter = (e) => {
     e.nativeEvent.stopImmediatePropagation();
-    const { onDragEnter } = this.props;
-    if (onDragEnter) {
+    const { onNodeDragEnter } = this.props;
+    if (onNodeDragEnter) {
       const path = this.nodePath;
       if (!this.hasChildren) {
         path.pop();
       }
-      onDragEnter(path);
+      onNodeDragEnter(path);
     }
   }
   get children() {
@@ -92,7 +96,15 @@ export class TreeViewStateless extends Component {
   render() {
     return (
       <li className={this.className}>
-        <div draggable className='node-container' onClick={this.onNodeClick} onDragEnter={this.onDragEnter} onDragStart={this.onDragStart} onDragOver={this.onDragOver} onDrop={this.onDrop}>
+        <div
+          className='node-container'
+          draggable
+          onClick={this.onNodeClick}
+          onDragEnter={this.onNodeDragEnter}
+          onDragStart={this.onNodeDragStart}
+          onDragOver={this.onDragOver}
+          onDrop={this.onNodeDrop}
+        >
           {this.hasChildren && <IconExpand expanded={this.isNodeExpanded}/>}
           {this.renderNode()}
         </div>
