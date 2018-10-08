@@ -42,6 +42,13 @@ export class TreeViewStateless extends Component {
       onNodeDragEnter(path);
     }
   }
+  onContextMenu = (evt) => {
+    const { onNodeContextMenu, node } = this.props;
+    if (onNodeContextMenu) {
+      evt.preventDefault();
+      onNodeContextMenu(node, { left: evt.pageX, top: evt.pageY });
+    }
+  }
   get children() {
     const { node: { childList = [] }, sortChildren } = this.props;
     const children = [...childList];
@@ -104,6 +111,7 @@ export class TreeViewStateless extends Component {
           onDragStart={this.onNodeDragStart}
           onDragOver={this.onDragOver}
           onDrop={this.onNodeDrop}
+          onContextMenu={this.onContextMenu}
         >
           {this.hasChildren && <IconExpand expanded={this.isNodeExpanded}/>}
           {this.renderNode()}

@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { equalPaths, pathString, pathContainsPath } from '../../util/path';
 
 import { TreeViewStateless } from './TreeViewStateless';
+import { ContextMenu } from './ContextMenu';
 
 function sortChildren(e1, e2) {
   if (e1.children && !e2.children) return -1;
@@ -42,7 +43,20 @@ export class TreeView extends Component {
     sourcePath: null,
     destinationPath: null,
     selectedPath: null,
+    contextMenu: { node: null, position: {} },
   };
+
+  closeNodeContextMenu = () => {
+    this.setState({ contextMenu: { node: null, position: {} } });
+  }
+
+  componentWillMount() {
+    document.addEventListener('click', this.closeNodeContextMenu);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('click', this.closeNodeContextMenu);
+  }
 
   componentWillUpdate(_, state) {
     if (this.state.expandedNodes !== state.expandedNodes) {
@@ -140,8 +154,12 @@ export class TreeView extends Component {
     }
   }
 
+  openNodeContextMenu = (node, { top, left }) => {
+    this.setState({ contextMenu: { node, position: { top, left } } });
+  }
+
   render() {
-    const { destinationPath, selectedPath } = this.state;
+    const { destinationPath, selectedPath, contextMenu } = this.state;
 
     return (
       <div
@@ -162,7 +180,9 @@ export class TreeView extends Component {
           path={[]}
           selectedPath={selectedPath}
           sortChildren={sortChildren}
+          onNodeContextMenu={this.openNodeContextMenu}
         />
+        <ContextMenu open={!!contextMenu.node} node={contextMenu.node} position={contextMenu.position}/>
       </div>
     );
   }
