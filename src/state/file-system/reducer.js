@@ -6,46 +6,43 @@ import { MOVE_NODE } from '../actions';
 
 const fileSystem = parseNodeTree(fileSystemRaw);
 
-function findNode(state, path) {
+function findNode(tree, path) {
   const [_, ...rest] = path;
-  return rest.reduce((current, segment) => current.children[segment], state);
+  return rest.reduce((current, segment) => current.children[segment], tree);
 }
 
-function removeNode(state, path) {
+function removeNode(tree, path) {
   const [_, child, ...rest] = path;
 
-  const children = { ...state.children };
+  const children = { ...tree.children };
   if (rest.length === 0) {
     delete children[child];
   } else {
     children[child] = removeNode(children[child], [child, ...rest]);
   }
-  return { ...state, children }
+  return { ...tree, children }
 }
 
-function addNode(state, path, node) {
+function addNode(tree, path, node) {
   const [_, child, ...rest] = path;
 
-  const children = { ...state.children };
+  const children = { ...tree.children };
   if (!child) {
     children[node.id] = node;
-  }
-  else if (rest.length === 0) {
-    children[child] = { ...children[child], children: { ...children[child].children, [node.id]: node } };
   } else {
     children[child] = addNode(children[child], [child, ...rest], node);
   }
-  return { ...state, children };
+  return { ...tree, children };
 }
 
-function moveNode(state, { source, destination }) {
-  if (pathContainsPath(source, destination)) return state;
+function moveNode(tree, { source, destination }) {
+  if (pathContainsPath(source, destination)) return tree;
 
-  const node = findNode(state, source);
-  const existingNodeInDestination = findNode(state, [...destination, node.id])
-  if (!!existingNodeInDestination) return state;
+  const node = findNode(tree, source);
+  const existingNodeInDestination = findNode(tree, [...destination, node.id])
+  if (!!existingNodeInDestination) return tree;
   
-  const nextState = removeNode(state, source)
+  const nextState = removeNode(tree, source)
   return addNode(nextState, destination, { ...node });
 }
 
