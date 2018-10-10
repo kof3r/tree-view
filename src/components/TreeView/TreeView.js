@@ -147,11 +147,19 @@ export class TreeView extends Component {
     return pathString(nodePath) in expandedNodes;
   }
 
-  focus = () => {
+  onMouseEnter = () => {
     const { containerRef } = this;
+    const { selectedPath } = this.state;
     if (containerRef) {
       containerRef.focus();
     }
+    if (!selectedPath) {
+      this.setRootNodeAsSelected();
+    }
+  }
+
+  setRootNodeAsSelected = () => {
+    this.setState({ selectedPath: this.indexPathMap[0] });
   }
 
   openNodeContextMenu = (node, { top, left }) => {
@@ -167,7 +175,8 @@ export class TreeView extends Component {
         ref={this.setContainerRef}
         tabIndex="0"
         onKeyDown={this.onKeyDown}
-        onMouseEnter={this.focus}
+        onMouseEnter={this.onMouseEnter}
+        onFocus={this.setRootNodeAsSelected}
       >
         <TreeViewStateless
           {...this.props}
