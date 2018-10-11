@@ -1,8 +1,8 @@
 
 import { combineReducers } from 'redux';
 
-import { fileSystemReducer } from './file-system';
+import { treeViewReducer } from './file-system';
 
 export default combineReducers({
-  fileSystem: fileSystemReducer,
+  fileSystem: treeViewReducer,
 });

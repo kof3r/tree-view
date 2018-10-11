@@ -33,6 +33,9 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.jsx'],
+    alias: {
+      'util.lib': path.resolve('src', 'util'),
+    }
   },
   plugins: [
     new HTMLWebpackPlugin({ template: 'index.html' }),

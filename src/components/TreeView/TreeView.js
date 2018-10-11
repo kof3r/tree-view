@@ -39,16 +39,13 @@ export class TreeView extends Component {
   }
 
   state = {
-    expandedNodes: {},
     sourcePath: null,
     destinationPath: null,
     selectedPath: null,
     contextMenu: { node: null, position: {} },
   };
 
-  closeNodeContextMenu = () => {
-    this.setState({ contextMenu: { node: null, position: {} } });
-  }
+  closeNodeContextMenu = () => this.setState({ contextMenu: { node: null, position: {} } });
 
   componentWillMount() {
     document.addEventListener('click', this.closeNodeContextMenu);
@@ -58,8 +55,8 @@ export class TreeView extends Component {
     document.removeEventListener('click', this.closeNodeContextMenu);
   }
 
-  componentWillUpdate(_, state) {
-    if (this.state.expandedNodes !== state.expandedNodes) {
+  componentWillUpdate(props) {
+    if (this.props.expandedNodes !== props.expandedNodes) {
       this.clearPathIndexCache();
     }
   }
@@ -71,8 +68,7 @@ export class TreeView extends Component {
 
   get indexPathMap() {
     if (!this.cache.indexPathMap) {
-      const { node } = this.props;
-      const { expandedNodes } = this.state;
+      const { node, expandedNodes } = this.props;
       this.cache.indexPathMap = buildIndexPathMap([], node, expandedNodes)
     }
     return this.cache.indexPathMap;
@@ -109,9 +105,7 @@ export class TreeView extends Component {
     }
   }
 
-  setDragSourcePath = (path) => {
-    this.setState({ sourcePath: path });
-  }
+  setDragSourcePath = (path) => this.setState({ sourcePath: path });
 
   setDragDestinationPath = (path) => {
     const { destinationPath, sourcePath } = this.state;
@@ -131,21 +125,10 @@ export class TreeView extends Component {
   }
 
   toggleExpand = (_, nodePath) => {
-    const { expandedNodes } = this.state;
-    const newExpandedNodes = { ...expandedNodes };
-    const path = pathString(nodePath);
-    if (path in expandedNodes) {
-      delete newExpandedNodes[path];
-    } else {
-      newExpandedNodes[path] = true;
-    }
-    this.setState({ expandedNodes: newExpandedNodes, selectedPath: nodePath });
+    this.props.toggleExpandedPath(nodePath);
   }
 
-  isNodeExpanded = (_, nodePath) => {
-    const { expandedNodes } = this.state;
-    return pathString(nodePath) in expandedNodes;
-  }
+  isNodeExpanded = (_, nodePath) => this.props.isPathExpanded(nodePath);
 
   onMouseEnter = () => {
     const { containerRef } = this;
@@ -158,15 +141,12 @@ export class TreeView extends Component {
     }
   }
 
-  setRootNodeAsSelected = () => {
-    this.setState({ selectedPath: this.indexPathMap[0] });
-  }
+  setRootNodeAsSelected = () => this.setState({ selectedPath: this.indexPathMap[0] });
 
-  openNodeContextMenu = (node, { top, left }) => {
-    this.setState({ contextMenu: { node, position: { top, left } } });
-  }
+  openNodeContextMenu = (node, { top, left }) => this.setState({ contextMenu: { node, position: { top, left } } });
 
   render() {
+    const { node, renderingKit } = this.props;
     const { destinationPath, selectedPath, contextMenu } = this.state;
 
     return (
@@ -179,7 +159,8 @@ export class TreeView extends Component {
         onFocus={this.setRootNodeAsSelected}
       >
         <TreeViewStateless
-          {...this.props}
+          renderingKit={renderingKit}
+          node={node}
           highlightedPath={destinationPath}
           isNodeExpanded={this.isNodeExpanded}
           onNodeClick={this.toggleExpand}
