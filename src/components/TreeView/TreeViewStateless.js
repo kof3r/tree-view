@@ -50,12 +50,7 @@ export class TreeViewStateless extends Component {
     }
   }
   get children() {
-    const { node: { childList = [] }, sortChildren } = this.props;
-    const children = [...childList];
-    if (sortChildren) {
-      children.sort(sortChildren);
-    }
-    return children;
+    return this.props.node.childListSorted;
   }
   get hasChildren() {
     return this.props.node.hasChildren;

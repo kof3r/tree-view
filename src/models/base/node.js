@@ -1,6 +1,12 @@
 
 import { NODE_PATH_DELIMITER } from '../../constants';
 
+function sortChildren(e1, e2) {
+  if (e1.children && !e2.children) return -1;
+  if (!e1.children && e2.children) return 1;
+  return e1.name.localeCompare(e2.name); 
+}
+
 export class Node {
   constructor(type, { id, children, data }) {
     if (typeof id !== 'string') {
@@ -22,6 +28,10 @@ export class Node {
 
   get childList() {
     return this.children ? Object.values(this.children) : undefined;
+  }
+
+  get childListSorted() {
+    return [...this.childList].sort(sortChildren);
   }
 
   get name() {

@@ -10,6 +10,7 @@ import {
   moveNode,
   selectPath,
   toggleExpandedPath,
+  shiftSelectedPath,
 } from '../state/file-system';
 
 import { TreeView, nodeRenderingKit } from '../components';
@@ -21,5 +22,5 @@ export const TreeViewPage = connect(
     isPathExpanded: $isPathExpanded(state),
     selectedPath: $selectedPath(state),
   }),
-  { moveNode, toggleExpandedPath, selectPath },
+  { moveNode, toggleExpandedPath, selectPath, shiftSelectedPath },
 )(props => <TreeView renderingKit={nodeRenderingKit} {...props}/>);
