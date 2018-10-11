@@ -9,7 +9,7 @@ function selectPath(_, payload) {
 
 export default createReducer(
   {
-    SELECT_PATH: selectPath,
+    [SELECT_PATH]: selectPath,
   },
   null,
 );
