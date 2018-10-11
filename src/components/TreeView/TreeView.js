@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { equalPaths, pathContainsPath } from '../../util/path';
 
 import { TreeViewStateless } from './TreeViewStateless';
-import { ContextMenu } from './ContextMenu';
+import { ContextMenu } from '../ContextMenu';
 
 export class TreeView extends Component {
   state = {
