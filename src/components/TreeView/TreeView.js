@@ -46,9 +46,8 @@ export class TreeView extends Component {
     this.setState({ sourcePath: null, destinationPath: null });
     moveNode(sourcePath, destinationPath);
   }
-  toggleExpand = (_, nodePath) => {
-    this.props.toggleExpandedPath(nodePath);
-  }
+  toggleExpand = (_, nodePath) => this.props.toggleExpandedPath(nodePath)
+  selectPath = (_, path) => this.props.selectPath(path);
   isNodeExpanded = (_, nodePath) => this.props.isPathExpanded(nodePath);
   onMouseEnter = () => {
     const { containerRef } = this;
@@ -80,7 +79,8 @@ export class TreeView extends Component {
           node={node}
           highlightedPath={destinationPath}
           isNodeExpanded={this.isNodeExpanded}
-          onNodeClick={this.toggleExpand}
+          onNodeClick={this.selectPath}
+          onNodeDoubleClick={this.toggleExpand}
           onNodeDragEnter={this.setDragDestinationPath}
           onNodeDragStart={this.setDragSourcePath}
           onNodeDrop={this.moveNode}

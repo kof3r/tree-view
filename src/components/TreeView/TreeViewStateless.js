@@ -63,6 +63,12 @@ export class TreeViewStateless extends Component {
     const { node, onNodeClick } = this.props;
     onNodeClick(node, this.nodePath);
   }
+  onNodeDoubleClick = () => {
+    const { node, onNodeDoubleClick } = this.props;
+    if (onNodeDoubleClick) {
+      onNodeDoubleClick(node, this.nodePath);
+    }
+  }
   get isNodeExpanded() {
     const { node, isNodeExpanded } = this.props;
     return isNodeExpanded(node, this.nodePath);
@@ -102,6 +108,7 @@ export class TreeViewStateless extends Component {
           className='node-container'
           draggable
           onClick={this.onNodeClick}
+          onDoubleClick={this.onNodeDoubleClick}
           onDragEnter={this.onNodeDragEnter}
           onDragStart={this.onNodeDragStart}
           onDragOver={this.onDragOver}
