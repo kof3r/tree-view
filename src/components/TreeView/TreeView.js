@@ -82,26 +82,26 @@ export class TreeView extends Component {
   }
 
   shiftSelectedNode(direction) {
-    const { selectedPath } = this.state;
+    const { selectedPath, selectPath } = this.props;
     const { pathIndexMap, indexPathMap } = this;
     if (selectedPath) {
       const nodeCount = indexPathMap.length;
       const currentIndex = pathIndexMap[pathString(selectedPath)];
       const nextIndex = (nodeCount + currentIndex + direction) % nodeCount;
-      this.setState({ selectedPath: indexPathMap[nextIndex] });
+      selectPath(indexPathMap[nextIndex]);
     } else {
-      this.setState({ selectedPath: indexPathMap[0] });
+      selectedPath(indexPathMap[0]);
     }
   }
 
   onKeyDown = (evt) => {
-    const { selectedPath } = this.state;
+    const { selectedPath, selectPath } = this.props;
     evt.preventDefault();
     switch (evt.key) {
       case 'ArrowUp': return this.shiftSelectedNode(-1);
       case 'ArrowDown': return this.shiftSelectedNode(1);
       case 'Enter': return this.toggleExpand(null, selectedPath);
-      case 'Escape': return this.setState({ selectedPath: null });
+      case 'Escape': return selectPath(null);
     }
   }
 
@@ -132,7 +132,7 @@ export class TreeView extends Component {
 
   onMouseEnter = () => {
     const { containerRef } = this;
-    const { selectedPath } = this.state;
+    const { selectedPath } = this.props;
     if (containerRef) {
       containerRef.focus();
     }
@@ -141,13 +141,13 @@ export class TreeView extends Component {
     }
   }
 
-  setRootNodeAsSelected = () => this.setState({ selectedPath: this.indexPathMap[0] });
+  setRootNodeAsSelected = () => this.props.selectPath([this.props.node.id]);
 
   openNodeContextMenu = (node, { top, left }) => this.setState({ contextMenu: { node, position: { top, left } } });
 
   render() {
-    const { node, renderingKit } = this.props;
-    const { destinationPath, selectedPath, contextMenu } = this.state;
+    const { node, renderingKit, selectedPath } = this.props;
+    const { destinationPath, contextMenu } = this.state;
 
     return (
       <div

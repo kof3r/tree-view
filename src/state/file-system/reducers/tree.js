@@ -47,6 +47,9 @@ function moveNode(tree, { source, destination }) {
   return addNode(nextState, destination, { ...node });
 }
 
-export default createReducer({
-  [MOVE_NODE]: moveNode,
-}, fileSystem);
+export default createReducer(
+  {
+    [MOVE_NODE]: moveNode,
+  },
+  fileSystem,
+);

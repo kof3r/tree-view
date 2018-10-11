@@ -5,6 +5,7 @@ import { modelNodeTree } from '../../parser';
 
 const $tree = state => state.fileSystem.tree;
 export const $expandedPaths = state => state.fileSystem.expandedPaths;
+export const $selectedPath = state => state.fileSystem.selectedPath;
 
 export const $root = createSelector(
   $tree,

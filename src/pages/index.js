@@ -2,7 +2,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { $root, moveNode, $expandedPaths, $isPathExpanded, toggleExpandedPath } from '../state/file-system';
+import {
+  $expandedPaths,
+  $isPathExpanded,
+  $root,
+  $selectedPath,
+  moveNode,
+  selectPath,
+  toggleExpandedPath,
+} from '../state/file-system';
+
 import { TreeView, nodeRenderingKit } from '../components';
 
 export const TreeViewPage = connect(
@@ -10,6 +19,7 @@ export const TreeViewPage = connect(
     node: $root(state),
     expandedNodes: $expandedPaths(state),
     isPathExpanded: $isPathExpanded(state),
+    selectedPath: $selectedPath(state),
   }),
-  { moveNode, toggleExpandedPath }
-)((props) => <TreeView renderingKit={nodeRenderingKit} {...props}/>);
+  { moveNode, toggleExpandedPath, selectPath },
+)(props => <TreeView renderingKit={nodeRenderingKit} {...props}/>);
