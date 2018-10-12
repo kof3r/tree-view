@@ -46,7 +46,7 @@ export class TreeViewStateless extends Component {
     const { onNodeContextMenu, node } = this.props;
     if (onNodeContextMenu) {
       evt.preventDefault();
-      onNodeContextMenu(node, { left: evt.pageX, top: evt.pageY });
+      onNodeContextMenu(node, this.nodePath, { left: evt.pageX, top: evt.pageY });
     }
   }
   get children() {

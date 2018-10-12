@@ -10,16 +10,10 @@ export class TreeView extends Component {
   state = {
     sourcePath: null,
     destinationPath: null,
-    contextMenu: { node: null, position: {} },
+    contextMenu: { node: null, path: null, position: {} },
   };
   setContainerRef = ref => this.containerRef = ref;
-  closeNodeContextMenu = () => this.setState({ contextMenu: { node: null, position: {} } });
-  componentWillMount() {
-    document.addEventListener('click', this.closeNodeContextMenu);
-  }
-  componentWillUnmount() {
-    document.removeEventListener('click', this.closeNodeContextMenu);
-  }
+  closeNodeContextMenu = () => this.setState({ contextMenu: { node: null, path: null, position: {} } });
   onKeyDown = (evt) => {
     const { selectedPath, selectPath, shiftSelectedPath } = this.props;
     evt.preventDefault();
@@ -60,7 +54,12 @@ export class TreeView extends Component {
     }
   }
   setRootNodeAsSelected = () => this.props.selectPath([this.props.node.id]);
-  openNodeContextMenu = (node, { top, left }) => this.setState({ contextMenu: { node, position: { top, left } } });
+  openNodeContextMenu = (node, path, position) => this.setState({ contextMenu: { node, path, position } });
+  contextRemoveNode = () => {
+    const { path } = this.state.contextMenu;
+    const { removeNode } = this.props;
+    removeNode(path);
+  }
   render() {
     const { node, renderingKit, selectedPath } = this.props;
     const { destinationPath, contextMenu } = this.state;
@@ -88,7 +87,13 @@ export class TreeView extends Component {
           selectedPath={selectedPath}
           onNodeContextMenu={this.openNodeContextMenu}
         />
-        <ContextMenu open={!!contextMenu.node} node={contextMenu.node} position={contextMenu.position}/>
+        <ContextMenu
+          open={!!contextMenu.node}
+          node={contextMenu.node}
+          position={contextMenu.position}
+          onRemove={this.contextRemoveNode}
+          onRequestClose={this.closeNodeContextMenu}
+        />
       </div>
     );
   }

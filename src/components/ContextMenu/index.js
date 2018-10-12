@@ -19,19 +19,18 @@ export class ContextMenu extends Component {
     return position;
   }
   render() {
-    const { node } = this.props;
+    const { node, onRemove, onRequestClose } = this.props;
     if (!node) return null;
 
     return (
-      <div
-        className={this.className}
-        style={this.style}
-      >
-        <div className='header'>{node.name}</div>
-        <div className='options'>
-          <div className='option'>add</div>
-          <div className='option'>edit</div>
-          <div className='option'>remove</div>
+      <div className={this.className} onClick={onRequestClose}>
+        <div className='menu' style={this.style}>
+          <div className='header'>{node.name}</div>
+          <div className='options'>
+            <div className='option'>add</div>
+            <div className='option'>edit</div>
+            <div className='option' onClick={onRemove}>remove</div>
+          </div>
         </div>
       </div>
     );
