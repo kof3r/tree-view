@@ -1,0 +1,25 @@
+
+.Layout.Split {
+  height: 100%;
+  position: relative;
+
+  .dragger {
+    position: absolute;
+    background-color: black;
+    width: 2px;
+    top: 0;
+    bottom: 0;
+    cursor: col-resize;
+  }
+
+  .container {
+    &.left, &.right {
+      display: inline-block;
+      height: 100%;
+    }
+
+    &.left {
+      overflow: auto;
+    }
+  }
+}

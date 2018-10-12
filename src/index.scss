@@ -1,6 +1,10 @@
 
 @import "./assets/styles/index";
 
+* {
+  box-sizing: border-box;
+}
+
 html {
   height: 100vh;
 }

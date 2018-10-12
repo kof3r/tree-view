@@ -5,6 +5,7 @@ import { hot } from 'react-hot-loader';
 
 import store from '../store';
 import { TreeViewPage } from '../pages';
+import { SplitLayout } from '../layouts';
 
 import './App.scss';
 
@@ -13,8 +14,9 @@ class App extends Component {
     return (
       <Provider store={store}>
         <div className='App'>
-          <h1>TreeView</h1>
-          <TreeViewPage/>
+          <SplitLayout
+            left={<TreeViewPage/>}
+          />
         </div>
       </Provider>
     );

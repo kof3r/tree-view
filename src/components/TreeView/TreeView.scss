@@ -12,6 +12,7 @@
     cursor: default;
     line-height: 24px;
     outline: none;
+    white-space: nowrap;
 
     .Node {
       padding-left: 8px;
@@ -71,6 +72,6 @@
 
 .TreeViewContainer {
   outline: none;
-  padding: 0 24px 20vh;
+  padding: 24px 24px 20vh;
   font-family: monospace;
 }
