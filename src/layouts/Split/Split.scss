@@ -8,10 +8,12 @@
   .dragger {
     position: absolute;
     background-color: black;
-    width: 2px;
+    width: 8px;
     top: 0;
     bottom: 0;
     cursor: col-resize;
+    border: solid white;
+    border-width: 0 3px;
   }
 
   .container {

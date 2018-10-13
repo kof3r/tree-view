@@ -9,6 +9,9 @@ export class SplitLayout extends Component {
   onMouseMove = (evt) => {
     if (!this.state.dragging) return;
 
+    const { pageX } = evt;
+    if (pageX < 100 || pageX > 500) return;
+
     this.setState({ leftWidth: evt.pageX });
   }
   startDrag = () => this.setState({ dragging: true });
