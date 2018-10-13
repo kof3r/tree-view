@@ -12,7 +12,7 @@ function readMessage(evt) {
   try {
     return JSON.parse(evt.data);
   } catch (err) {
-    console.log(err);
+    console.log("readMessage err:", err);
     return null;
   }
 }
@@ -24,7 +24,17 @@ ws.onopen = (() => {
 });
 
 ws.onmessage = (message) => {
-  const data = readMessage(message);
-  console.log(data);
-  store.dispatch(setRootNode(data));
+  if (message != "") {
+    const data = readMessage(message);
+    if (data != null) {
+      var msg = JSON.parse(data);
+      console.log("message received:", msg);
+  
+      store.dispatch(setRootNode(msg));    
+    } else {
+      console.log("ws.onMessage - data is NULL!");
+    }
+  } else {
+    console.log("empty ws response recieved, probably connected response")
+  }
 }
