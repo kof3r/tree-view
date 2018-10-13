@@ -14,7 +14,7 @@ export class File extends Node {
   constructor(node) {
     super(nodeTypes.FILE, node);
 
-    this.data.fileType = fileExtension(node.id);
+    this.data.fileType = fileExtension(super.name);
   }
 
   get fileType() {

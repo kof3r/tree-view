@@ -8,7 +8,7 @@ function sortChildren(e1, e2) {
 }
 
 export class Node {
-  constructor(type, { id, children, data }) {
+  constructor(type, { id, label, children, data }) {
     if (typeof id !== 'string') {
       throw new Error(`node id must be a string, you provided ${id} with a type of ${typeof id}`);
     }
@@ -18,6 +18,7 @@ export class Node {
 
     this.type = type;
     this.id = id;
+    this.label = label;
     this.children = children;
     this.data = data || {};
   }
@@ -35,6 +36,6 @@ export class Node {
   }
 
   get name() {
-    return this.id;
+    return this.label !== undefined ? this.label : this.id;
   }
 }

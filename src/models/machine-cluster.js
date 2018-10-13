@@ -20,7 +20,7 @@ export class Drive extends Node {
   }
 
   get name() {
-    return `${this.id}:/`;
+    return `${super.name}:/`;
   }
 
   get fill() {

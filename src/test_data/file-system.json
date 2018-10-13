@@ -1,46 +1,47 @@
 {
   "type": "DIRECTORY",
-  "id": "root",
+  "id": "custom-root-id",
+  "label": "root",
   "children": [
     {
       "type": "DIRECTORY",
-      "id": "home",
+      "label": "home",
       "children": [
         {
           "type": "DIRECTORY",
-          "id": "kof3r",
+          "label": "kof3r",
           "children": [
             {
               "type": "DIRECTORY",
-              "id": "tree-view",
+              "label": "tree-view",
               "children": [
-                { "type": "FILE", "id": "index.js" },
-                { "type": "FILE", "id": "TreeView.js" }
+                { "type": "FILE", "label": "index.js" },
+                { "type": "FILE", "label": "TreeView.js" }
               ]
             },
-            { "type": "FILE", "id": "kof3r.jpg" },
-            { "type": "FILE", "id": "todos.txt" }
+            { "type": "FILE", "label": "kof3r.jpg" },
+            { "type": "FILE", "label": "todos.txt" }
           ]
         },
         {
           "type": "DIRECTORY",
-          "id": "ljubo",
+          "label": "ljubo",
           "children": [
-            { "type": "FILE", "id": "ljubo.jpg" },
-            { "type": "FILE", "id": "main.go" },
-            { "type": "FILE", "id": "todos.txt" },
+            { "type": "FILE", "label": "ljubo.jpg" },
+            { "type": "FILE", "label": "main.go" },
+            { "type": "FILE", "label": "todos.txt" },
             {
               "type": "MACHINE_CLUSTER",
-              "id": "aws-cluster",
+              "label": "aws-cluster",
               "children": [
                 {
                   "type": "MACHINE",
-                  "id": "centrala",
+                  "label": "centrala",
                   "children": [
-                    { "type": "DRIVE", "id": "C", "data": { "used": 50, "total": 100 } },
-                    { "type": "DRIVE", "id": "D", "data": { "used": 90, "total": 900 } },
-                    { "type": "DATABASE", "id": "MSSQL" },
-                    { "type": "DATABASE", "id": "postgresql" }
+                    { "type": "DRIVE", "label": "C", "data": { "used": 50, "total": 100 } },
+                    { "type": "DRIVE", "label": "D", "data": { "used": 90, "total": 900 } },
+                    { "type": "DATABASE", "label": "MSSQL" },
+                    { "type": "DATABASE", "label": "postgresql" }
                   ],
                   "data": {
                     "IP": "192.168.1.1",
@@ -54,34 +55,34 @@
                 },
                 {
                   "type": "MACHINE",
-                  "id": "blagajna-1",
+                  "label": "blagajna-1",
                   "children": [
-                    { "type": "DRIVE", "id": "C", "data": { "used": 90, "total": 100 } },
-                    { "type": "PRINTER", "id": "printer" }
+                    { "type": "DRIVE", "label": "C", "data": { "used": 90, "total": 100 } },
+                    { "type": "PRINTER", "label": "printer" }
                   ]
                 },
                 {
                   "type": "MACHINE",
-                  "id": "blagajna-2",
+                  "label": "blagajna-2",
                   "children": [
-                    { "type": "DRIVE", "id": "C", "data": { "used": 40, "total": 100 } },
-                    { "type": "PRINTER", "id": "printer" }
+                    { "type": "DRIVE", "label": "C", "data": { "used": 40, "total": 100 } },
+                    { "type": "PRINTER", "label": "printer" }
                   ]
                 },
                 {
                   "type": "MACHINE",
-                  "id": "blagajna-3",
+                  "label": "blagajna-3",
                   "children": [
-                    { "type": "DRIVE", "id": "C", "data": { "used": 70, "total": 100 } },
-                    { "type": "PRINTER", "id": "printer" }
+                    { "type": "DRIVE", "label": "C", "data": { "used": 70, "total": 100 } },
+                    { "type": "PRINTER", "label": "printer" }
                   ]
                 }
               ]
             }
           ]
         },
-        { "type": "FILE", "id": "ramblings.txt" },
-        { "type": "FILE", "id": "awesome-wallpaper.jpg" }
+        { "type": "FILE", "label": "ramblings.txt" },
+        { "type": "FILE", "label": "awesome-wallpaper.jpg" }
       ]
     }
   ]

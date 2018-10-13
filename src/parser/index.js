@@ -1,4 +1,6 @@
 
+import uuid from 'uuid';
+
 import { nodeTypes } from '../constants';
 import { Directory, File, MachineCluster, Machine, Drive, Database, Printer } from '../models';
 
@@ -13,10 +15,17 @@ const constructors = {
 }
 
 export function parseNodeTree(rootNode) {
-  const node = { ...rootNode };
-  node.data = node.data ? JSON.parse(JSON.stringify(node.data)) : {};
-  if (node.children) {
-    node.children = node.children.reduce((dict, child) => Object.assign(dict, { [child.id]: parseNodeTree(child) }), {});
+  const node = {
+    ...rootNode,
+    id: rootNode.id ? rootNode.id : uuid.v4(),
+    data: rootNode.data ? JSON.parse(JSON.stringify(rootNode.data)) : {},
+  };
+  if (rootNode.children) {
+    node.children = {};
+    for (const rootChild of rootNode.children) {
+      const child = parseNodeTree(rootChild);
+      node.children[child.id] = child;
+    }
   }
   return node;
 }
