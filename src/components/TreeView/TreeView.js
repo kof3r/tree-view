@@ -77,7 +77,6 @@ export class TreeView extends Component {
         tabIndex="0"
         onKeyDown={this.onKeyDown}
         onMouseEnter={this.onMouseEnter}
-        onFocus={this.setRootNodeAsSelected}
       >
         <TreeViewStateless
           resolveNodeRenderer={resolveNodeRenderer}
