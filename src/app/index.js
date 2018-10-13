@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { hot } from 'react-hot-loader';
 
 import store from '../store';
-import { TreeViewPage } from '../pages';
+import { TreeViewPage, DetailViewPage } from '../pages';
 import { SplitLayout } from '../layouts';
 
 import './App.scss';
@@ -16,6 +16,7 @@ class App extends Component {
         <div className='App'>
           <SplitLayout
             left={<TreeViewPage/>}
+            right={<DetailViewPage/>}
           />
         </div>
       </Provider>

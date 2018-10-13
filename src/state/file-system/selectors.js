@@ -41,3 +41,14 @@ export const $pathIndexMap = createSelector(
   $indexPathMap,
   indexPathMap => indexPathMap.reduce((pim, path, idx) => Object.assign(pim, { [pathString(path)]: idx }), {}),
 );
+
+export const $selectedNode = createSelector(
+  $root,
+  $selectedPath,
+  (root, path) => {
+    if (!path) return null;
+
+    const [_, ...segments] = path;
+    return segments.reduce((node, segment) => node.children[segment], root);
+  }
+);
