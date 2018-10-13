@@ -41,7 +41,13 @@
                     { "type": "DRIVE", "id": "D", "data": { "used": 90, "total": 900 } },
                     { "type": "DATABASE", "id": "MSSQL" },
                     { "type": "DATABASE", "id": "postgresql" }
-                  ]
+                  ],
+                  "data": {
+                    "IP": "192.168.1.1",
+                    "upTime": "2 days 21 hours 14 minutes 43 seconds",
+                    "owner": "SuperSport",
+                    "administrator": "Kvile"
+                  }
                 },
                 {
                   "type": "MACHINE",

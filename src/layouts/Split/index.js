@@ -28,10 +28,10 @@ export class SplitLayout extends Component {
   render() {
     const { left = null, right  } = this.props;
     return (
-      <div className={this.className} onMouseMove={this.onMouseMove}>
+      <div className={this.className} onMouseMove={this.onMouseMove} onMouseUp={this.stopDrag}>
         <div className='container left' style={this.styleLeft}>{left}</div>
         <div className='container right'>{right}</div>
-        <div className='dragger' style={this.styleDragger} onMouseDown={this.startDrag} onMouseUp={this.stopDrag}/>
+        <div className='dragger' style={this.styleDragger} onMouseDown={this.startDrag}/>
       </div>
     );
   }

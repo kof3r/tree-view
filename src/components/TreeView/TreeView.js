@@ -12,6 +12,12 @@ export class TreeView extends Component {
     destinationPath: null,
     contextMenu: { node: null, path: null, position: {} },
   };
+  componentDidMount() {
+    const { containerRef } = this;
+    if (containerRef) {
+      containerRef.focus();
+    }
+  }
   setContainerRef = ref => this.containerRef = ref;
   closeNodeContextMenu = () => this.setState({ contextMenu: { node: null, path: null, position: {} } });
   onKeyDown = (evt) => {

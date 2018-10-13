@@ -2,7 +2,27 @@
 .DetailView {
   padding: 24px;
 
-  h1 {
+  .Node {
+    font-size: 24px;
     margin-bottom: 24px;
+  }
+
+  table {
+    width: 100%;
+    text-align: left;
+    font-size: 16px;
+    border-collapse: collapse;
+
+    th, td {
+      padding: 4px 12px;
+    }
+
+    th {
+      border-bottom: solid black 1px;
+    }
+
+    th:first-child {
+      width: 256px;
+    }
   }
 }
