@@ -96,9 +96,8 @@ export class TreeViewStateless extends Component {
     )
   }
   renderNode() {
-    const { node, renderingKit } = this.props;
-    const { type } = node;
-    const Node = (type in renderingKit) ? renderingKit[type] : DefaultNode;
+    const { node, resolveNodeRenderer } = this.props;
+    const Node = resolveNodeRenderer(node);
     return <Node node={node}/>;
   }
   render() {

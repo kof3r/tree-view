@@ -67,7 +67,7 @@ export class TreeView extends Component {
     removeNode(path);
   }
   render() {
-    const { node, renderingKit, selectedPath } = this.props;
+    const { node, resolveNodeRenderer, selectedPath } = this.props;
     const { destinationPath, contextMenu } = this.state;
 
     return (
@@ -80,7 +80,7 @@ export class TreeView extends Component {
         onFocus={this.setRootNodeAsSelected}
       >
         <TreeViewStateless
-          renderingKit={renderingKit}
+          resolveNodeRenderer={resolveNodeRenderer}
           node={node}
           highlightedPath={destinationPath}
           isNodeExpanded={this.isNodeExpanded}

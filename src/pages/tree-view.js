@@ -14,7 +14,7 @@ import {
   removeNode,
 } from '../state/file-system';
 
-import { TreeView, nodeRenderingKit } from '../components';
+import { TreeView, resolveNodeRenderer } from '../components';
 
 export const TreeViewPage = connect(
   state => ({
@@ -24,4 +24,4 @@ export const TreeViewPage = connect(
     selectedPath: $selectedPath(state),
   }),
   { moveNode, removeNode, toggleExpandedPath, selectPath, shiftSelectedPath },
-)(props => <TreeView renderingKit={nodeRenderingKit} {...props}/>);
+)(props => <TreeView resolveNodeRenderer={resolveNodeRenderer} {...props}/>);

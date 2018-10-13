@@ -1,20 +1,22 @@
 
 import React, { PureComponent } from 'react';
-import { nodeRenderingKit } from '../node-rendering-kit';
 
 import './DetailView.scss';
 
 export class DetailView extends PureComponent {
+  renderNode() {
+    const { node, resolveNodeRenderer } = this.props;
+    const Node = resolveNodeRenderer(node)
+    return <Node node={node}/>
+  }
   render() {
     const { node } = this.props;
 
     if (!node) return null;
 
-    const Node = node.type in nodeRenderingKit ? nodeRenderingKit[node.type] : ({ node }) => <span>{node.name}</span>;
-
     return (
       <div className='DetailView'>
-        <Node node={node}/>
+        {this.renderNode()}
         <table>
           <thead>
             <tr>

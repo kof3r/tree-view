@@ -16,7 +16,6 @@ export const File = ({ node }) => {
 
   return (
     <Node
-      className='File'
       node={node}
       icon={icon}
     />

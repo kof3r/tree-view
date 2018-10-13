@@ -1,18 +1,7 @@
 
 import uuid from 'uuid';
 
-import { nodeTypes } from '../constants';
-import { Directory, File, MachineCluster, Machine, Drive, Database, Printer } from '../models';
-
-const constructors = {
-  [nodeTypes.DATABASE]: Database,
-  [nodeTypes.DIRECTORY]: Directory,
-  [nodeTypes.DRIVE]: Drive,
-  [nodeTypes.FILE]: File,
-  [nodeTypes.MACHINE]: Machine,
-  [nodeTypes.MACHINE_CLUSTER]: MachineCluster,
-  [nodeTypes.PRINTER]: Printer,
-}
+import { createNodeModel } from '../models';
 
 export function parseNodeTree(rootNode) {
   const node = {
@@ -40,6 +29,5 @@ export function modelNodeTree(rootNode) {
     });
     node.children = modeledChildren;
   }
-  const Constructor = constructors[node.type];
-  return new Constructor(node);
+  return createNodeModel(node);
 }

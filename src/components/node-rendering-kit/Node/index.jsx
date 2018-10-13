@@ -8,7 +8,7 @@ import './Node.scss';
 
 export const Node = ({ className, icon, node, children, ...props }) => {
   return (
-    <span className={classnames('Node', className)} {...props}>
+    <span className={classnames('Node', node.type, className)} {...props}>
       <Icon icon={icon}/>
       <span className='name'>{node.name}</span>
       {children}
