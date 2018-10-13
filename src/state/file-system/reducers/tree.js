@@ -13,7 +13,7 @@ function findNode(tree, path) {
 }
 
 function setRootNode(_, node) {
-  return { ...node };
+  return parseNodeTree(node);
 }
 
 function removeNode(tree, path) {

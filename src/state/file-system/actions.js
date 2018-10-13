@@ -4,7 +4,7 @@ import { $indexPathMap, $pathIndexMap, $selectedPath, $root } from './selectors'
 import { pathString } from 'util.lib/path';
 
 export function setRootNode(node) {
-  return { type: SET_ROOT_NODE, payload: parseNodeTree(node) };
+  return { type: SET_ROOT_NODE, payload: node };
 }
 
 export function moveNode(source, destination) {
