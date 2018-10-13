@@ -1,4 +1,7 @@
 
+import store from '../store';
+import { setRootNode } from '../state/file-system'
+
 const ws = new WebSocket('ws://localhost:10000/tv-backend/ws');
 
 function sendMessage(message) {
@@ -23,4 +26,5 @@ ws.onopen = (() => {
 ws.onmessage = (message) => {
   const data = readMessage(message);
   console.log(data);
+  store.dispatch(setRootNode(data));
 }

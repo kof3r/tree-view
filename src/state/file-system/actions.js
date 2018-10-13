@@ -1,7 +1,11 @@
 
-import { MOVE_NODE, REMOVE_NODE, TOGGLE_EXPANDED_PATH, SELECT_PATH } from '../actions';
+import { MOVE_NODE, REMOVE_NODE, TOGGLE_EXPANDED_PATH, SELECT_PATH, SET_ROOT_NODE } from '../actions';
 import { $indexPathMap, $pathIndexMap, $selectedPath, $root } from './selectors';
 import { pathString } from 'util.lib/path';
+
+export function setRootNode(node) {
+  return { type: SET_ROOT_NODE, payload: parseNodeTree(node) };
+}
 
 export function moveNode(source, destination) {
   return { type: MOVE_NODE, payload: { source, destination } };

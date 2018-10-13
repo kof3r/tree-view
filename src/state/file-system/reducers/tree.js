@@ -2,7 +2,7 @@
 import fileSystemRaw from '../../../test_data/file-system.json';
 import { parseNodeTree } from '../../../parser';
 import { pathContainsPath } from '../../../util/path';
-import { MOVE_NODE, REMOVE_NODE } from '../../actions';
+import { MOVE_NODE, REMOVE_NODE, SET_ROOT_NODE } from '../../actions';
 import { createReducer } from 'util.lib/redux';
 
 const fileSystem = parseNodeTree(fileSystemRaw);
@@ -10,6 +10,10 @@ const fileSystem = parseNodeTree(fileSystemRaw);
 function findNode(tree, path) {
   const [_, ...rest] = path;
   return rest.reduce((current, segment) => current.children[segment], tree);
+}
+
+function setRootNode(_, node) {
+  return { ...node };
 }
 
 function removeNode(tree, path) {
@@ -51,6 +55,7 @@ export default createReducer(
   {
     [MOVE_NODE]: moveNode,
     [REMOVE_NODE]: removeNode,
+    [SET_ROOT_NODE]: setRootNode,
   },
   fileSystem,
 );
