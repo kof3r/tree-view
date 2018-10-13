@@ -6,8 +6,12 @@ function sendMessage(message) {
 }
 
 function readMessage(evt) {
-  console.log(evt)
-  return JSON.parse(evt.data);
+  try {
+    return JSON.parse(evt.data);
+  } catch (err) {
+    console.log(err);
+    return null;
+  }
 }
 
 ws.onopen = (() => {
