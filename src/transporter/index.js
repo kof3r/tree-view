@@ -5,8 +5,9 @@ function sendMessage(message) {
   ws.send(JSON.stringify(message));
 }
 
-function readMessage({ data }) {
-  return JSON.parse(data);
+function readMessage(evt) {
+  console.log(evt)
+  return JSON.parse(evt.data);
 }
 
 ws.onopen = (() => {
