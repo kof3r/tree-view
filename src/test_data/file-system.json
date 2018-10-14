@@ -15,28 +15,29 @@
               "type": "Directory",
               "label": "tree-view",
               "children": [
-                { "type": "File", "label": "index.js" },
-                { "type": "File", "label": "TreeView.js" },
+                { "type": "File", "label": "index.js", "data": { "type": "js" } },
+                { "type": "File", "label": "TreeView.js", "data": { "type": "js" } },
                 {
                   "type": "File",
                   "label": "readme.md",
                   "data": {
+                    "type": "md",
                     "content": "# TreeView\r\n\r\nReact tree view component.\r\n\r\n## Installation\r\n\r\n```\r\ngit clone https:\/\/github.com\/kof3r\/tree-view\r\n\r\nnpm install\r\n\r\nnpm start\r\n\r\nhttp:\/\/localhost:8080\r\n```\r\n"
                   }
                 }
               ]
             },
-            { "type": "File", "label": "kof3r.jpg", "data": { "content": "https://avatars0.githubusercontent.com/u/16462208?s=460&v=4" } },
-            { "type": "File", "label": "todos.txt" }
+            { "type": "File", "label": "kof3r.jpg", "data": { "type": "jpg", "content": "https://avatars0.githubusercontent.com/u/16462208?s=460&v=4" } },
+            { "type": "File", "label": "todos.txt", "data": { "type": "txt" } }
           ]
         },
         {
           "type": "Directory",
           "label": "ljubo",
           "children": [
-            { "type": "File", "label": "ljubo.jpg", "data": { "content": "https://avatars2.githubusercontent.com/u/864692?s=460&v=4" } },
-            { "type": "File", "label": "main.go" },
-            { "type": "File", "label": "todos.txt" },
+            { "type": "File", "label": "ljubo.jpg", "data": { "type": "jpg", "content": "https://avatars2.githubusercontent.com/u/864692?s=460&v=4" } },
+            { "type": "File", "label": "main.go", "data": { "type": "go" } },
+            { "type": "File", "label": "todos.txt", "data": { "type": "txt" } },
             {
               "type": "Directory",
               "label": "Prezentacija",
@@ -45,6 +46,7 @@
                   "type": "File",
                   "label": "intro.md",
                   "data": {
+                    "type": "md",
                     "content": "# Intro\r\n"
                   }
                 }
@@ -101,8 +103,8 @@
             }
           ]
         },
-        { "type": "File", "label": "ramblings.txt" },
-        { "type": "File", "label": "awesome-wallpaper.jpg" }
+        { "type": "File", "label": "ramblings.txt", "data": { "type": "txt" } },
+        { "type": "File", "label": "awesome-wallpaper.jpg", "data": { "type": "jpg" } }
       ]
     }
   ]
