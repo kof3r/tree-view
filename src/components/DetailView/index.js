@@ -1,13 +1,17 @@
 
 import React, { PureComponent } from 'react';
+import classnames from 'classnames';
 
 import './DetailView.scss';
 
 export class DetailView extends PureComponent {
-  renderNode() {
-    const { node, resolveNodeRenderer } = this.props;
-    const Node = resolveNodeRenderer(node)
-    return <Node node={node}/>
+  renderNodeDetailView() {
+    const { node, resolveNodeRenderer, resolveNodeTitleRenderer } = this.props;
+    const NodeDetailView = resolveNodeRenderer(node)
+    return <NodeDetailView node={node} resolveNodeTitleRenderer={resolveNodeTitleRenderer}/>;
+  }
+  get className() {
+    return classnames('DetailView', this.props.node.type);
   }
   render() {
     const { node } = this.props;
@@ -15,24 +19,8 @@ export class DetailView extends PureComponent {
     if (!node) return null;
 
     return (
-      <div className='DetailView'>
-        {this.renderNode()}
-        <table>
-          <thead>
-            <tr>
-              <th>key</th>
-              <th>value</th>
-            </tr>
-          </thead>
-          <tbody>
-            {Object.keys(node.data).map(key => (
-              <tr key={key}>
-                <td>{key}</td>
-                <td>{node.data[key]}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <div className={this.className}>
+        {this.renderNodeDetailView()}
       </div>
     );
   }

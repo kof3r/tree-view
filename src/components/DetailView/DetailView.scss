@@ -25,4 +25,14 @@
       width: 256px;
     }
   }
+
+  &.File {
+    .md {
+      pre {
+        padding: 12px;
+        background-color: transparentize(black, 0.1);
+        color: greenyellow;
+      }
+    }
+  }
 }

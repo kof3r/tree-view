@@ -16,10 +16,17 @@
               "label": "tree-view",
               "children": [
                 { "type": "File", "label": "index.js" },
-                { "type": "File", "label": "TreeView.js" }
+                { "type": "File", "label": "TreeView.js" },
+                {
+                  "type": "File",
+                  "label": "readme.md",
+                  "data": {
+                    "content": "# TreeView\r\n\r\nReact tree view component.\r\n\r\n## Installation\r\n\r\n```\r\ngit clone https:\/\/github.com\/kof3r\/tree-view\r\n\r\nnpm install\r\n\r\nnpm start\r\n\r\nhttp:\/\/localhost:8080\r\n```\r\n"
+                  }
+                }
               ]
             },
-            { "type": "File", "label": "kof3r.jpg" },
+            { "type": "File", "label": "kof3r.jpg", "data": { "content": "https://avatars0.githubusercontent.com/u/16462208?s=460&v=4" } },
             { "type": "File", "label": "todos.txt" }
           ]
         },
@@ -27,9 +34,22 @@
           "type": "Directory",
           "label": "ljubo",
           "children": [
-            { "type": "File", "label": "ljubo.jpg" },
+            { "type": "File", "label": "ljubo.jpg", "data": { "content": "https://avatars2.githubusercontent.com/u/864692?s=460&v=4" } },
             { "type": "File", "label": "main.go" },
             { "type": "File", "label": "todos.txt" },
+            {
+              "type": "Directory",
+              "label": "Prezentacija",
+              "children": [
+                {
+                  "type": "File",
+                  "label": "intro.md",
+                  "data": {
+                    "content": "# Intro\r\n"
+                  }
+                }
+              ]
+            },
             {
               "type": "MachineCluster",
               "label": "aws-cluster",
