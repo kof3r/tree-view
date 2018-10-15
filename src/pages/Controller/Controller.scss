@@ -1,0 +1,19 @@
+
+.ControllerPage {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  button {
+    display: block;
+    flex: 1;
+    background-color: white;
+    font-size: 64px;
+    border: none;
+    cursor: pointer;
+
+    &:not(:last-child) {
+      border-bottom: solid black 3px;
+    }
+  }
+}

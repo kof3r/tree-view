@@ -9,7 +9,7 @@ export const $selectedPath = state => state.fileSystem.selectedPath;
 
 export const $root = createSelector(
   $tree,
-  tree => modelNodeTree(tree)
+  tree => tree ? modelNodeTree(tree) : null
 );
 
 export const $isPathExpanded = createSelector(

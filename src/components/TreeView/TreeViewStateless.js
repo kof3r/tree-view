@@ -101,6 +101,9 @@ export class TreeViewStateless extends Component {
     return <Node node={node}/>;
   }
   render() {
+    const { node } = this.props;
+    if (!node) return null;
+
     return (
       <li className={this.className}>
         <div

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --config webpack.config.dev.js -d --hot --no-info"
+    "start": "DATA_SOURCE=ws://192.168.0.53:3000/data-source CONTROLLER=ws://192.168.0.53:3000/controller webpack-dev-server --config webpack.config.dev.js -d --hot --no-info --host 0.0.0.0"
   },
   "keywords": [],
   "author": "",
@@ -32,11 +32,13 @@
     "classnames": "^2.2.6",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
-    "react-markdown": "^4.0.3",
     "react-redux": "^5.0.7",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
     "redux": "^4.0.0",
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
+    "showdown": "^1.8.6",
     "uuid": "^3.3.2"
   }
 }

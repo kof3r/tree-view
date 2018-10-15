@@ -16,7 +16,20 @@ export function removeNode(path) {
 }
 
 export function toggleExpandedPath(path) {
-  return { type: TOGGLE_EXPANDED_PATH, payload: path };
+  if (Array.isArray(path)) {
+    return { type: TOGGLE_EXPANDED_PATH, payload: path };
+  }
+  return (dispatch, getState) => {
+    const state = getState();
+    const selectedPath = $selectedPath(state);
+    if (selectedPath) {
+      return dispatch({ type: TOGGLE_EXPANDED_PATH, payload: selectedPath })
+    }
+    const rootNode = $root(state);
+    if (rootNode) {
+      return dispatch({ type: TOGGLE_EXPANDED_PATH, payload: selectedPath })
+    }
+  }
 }
 
 export function selectPath(path) {

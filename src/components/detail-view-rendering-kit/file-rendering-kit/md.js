@@ -1,21 +1,18 @@
 
 import React, { PureComponent } from 'react';
-import ReactDOM from 'react-dom';
-import ReactMarkdown from 'react-markdown';
+import showdown from 'showdown';
 
 export class md extends PureComponent {
   setContentRef = ref => this.contentRef = ref;
-  componentDidMount() {
+  mdToHtmlConverter = new showdown.Converter()
+  get htmlContent() {
     const { content } = this.props;
 
-    ReactDOM.render(
-      <ReactMarkdown source={content}/>,
-      this.contentRef,
-    );
+    return { __html: this.mdToHtmlConverter.makeHtml(content) }
   }
   render() {
     return (
-      <div className='md' ref={this.setContentRef}/>
+      <div className='md' dangerouslySetInnerHTML={this.htmlContent}/>
     );
   }
 }

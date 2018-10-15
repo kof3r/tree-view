@@ -22,7 +22,7 @@
                   "label": "readme.md",
                   "data": {
                     "type": "md",
-                    "content": "# TreeView\r\n\r\nReact tree view component.\r\n\r\n## Installation\r\n\r\n```\r\ngit clone https:\/\/github.com\/kof3r\/tree-view\r\n\r\nnpm install\r\n\r\nnpm start\r\n\r\nhttp:\/\/localhost:8080\r\n```\r\n"
+                    "content": "# TreeView\n\nReact tree view component.\n\n## Installation\n\n```\ngit clone https:\/\/github.com\/kof3r\/tree-view\n\nnpm install\n\nnpm start\n\nhttp:\/\/localhost:8080\n```\n"
                   }
                 }
               ]
