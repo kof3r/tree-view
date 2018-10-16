@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "DATA_SOURCE=ws://192.168.0.53:3000/data-source CONTROLLER=ws://192.168.0.53:3000/controller webpack-dev-server --config webpack.config.dev.js -d --hot --no-info --host 0.0.0.0"
+    "start": "webpack-dev-server --config webpack.config.dev.js -d --hot --no-info --host 0.0.0.0"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +17,7 @@
     "babel-loader": "^8.0.4",
     "babel-preset-es2015": "^6.24.1",
     "css-loader": "^1.0.0",
+    "dotenv": "^6.1.0",
     "file-loader": "^2.0.0",
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.4.3",
