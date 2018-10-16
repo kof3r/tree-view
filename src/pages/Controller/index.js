@@ -1,5 +1,6 @@
 
 import React, { Component } from 'react';
+import { Icon } from '../../components';
 
 import './Controller.scss';
 
@@ -21,9 +22,9 @@ export class ControllerPage extends Component {
   render() {
     return (
       <div className='ControllerPage'>
-        <button onClick={() => this.sendMessage('SelectPreviousNode')}>previous</button>
+        <button onClick={() => this.sendMessage('SelectPreviousNode')}><Icon icon='cheveron-up'/></button>
         <button onClick={() => this.sendMessage('ToggleSelectedNodeExpand')}>expand</button>
-        <button onClick={() => this.sendMessage('SelectNextNode')}>next</button>
+        <button onClick={() => this.sendMessage('SelectNextNode')}><Icon icon='cheveron-down'/></button>
       </div>
     );
   }
