@@ -21,6 +21,7 @@
       overflow: auto;
     }
     &.right {
+      overflow-y: auto;
       flex: 1;
     }
   }
