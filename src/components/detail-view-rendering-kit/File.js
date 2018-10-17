@@ -7,7 +7,7 @@ export class File extends PureComponent {
     const { resolveNodeTitleRenderer, node } = this.props;
     if (node.fileType in fileRenderingKit) {
       const Content = fileRenderingKit[node.fileType];
-      return <Content content={node.content}/>
+      return <Content content={node.content} path={node.filePath}/>
     }
     const Title = resolveNodeTitleRenderer(node);
     return <Title node={node}/>
