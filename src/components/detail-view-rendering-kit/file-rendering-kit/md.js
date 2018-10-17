@@ -9,15 +9,8 @@ export class md extends PureComponent {
   setContentRef = ref => this.contentRef = ref;
   mdToHtmlConverter = new showdown.Converter()
   get htmlContent() {
-    const { path } = this.props;
-    const content = this.props.content || this.state.content;
-    if (content) {
-      return { __html: this.mdToHtmlConverter.makeHtml(content) };
-    }
-    fetch(path)
-      .then(response => response.text())
-      .then(text => this.setState({ content: text.toString() }));
-    return { __html: '' };
+    const { content = '' } = this.props;
+    return { __html: this.mdToHtmlConverter.makeHtml(content) };
   }
   render() {
     return (
