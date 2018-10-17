@@ -30,13 +30,20 @@ export class SocketDataSource extends DataSource {
   }
   handleMessage({ data }) {
     try {
-      const { procedure, payload } = JSON.parse(data);
-      if (!(procedure in this.messageHandlers)) {
-        console.error(`unrecognized procedure: ${procedure}`);
-        console.log('supported procedures: ', Object.keys(this.messageHandlers).join(', '));
-        return;
+      console.log("data", data);
+      if (data != null) {
+        let datax = JSON.parse(data);
+        const { procedure, payload } = JSON.parse(datax);
+        console.log("procedure", procedure);
+        
+        if (!(procedure in this.messageHandlers)) {
+          console.error(`unrecognized procedure: ${procedure}`);
+          console.log('supported procedures: ', Object.keys(this.messageHandlers).join(', '));
+          return;
+        }
+        this.messageHandlers[procedure](payload);
+  
       }
-      this.messageHandlers[procedure](payload);
     } catch (err) {
       console.error('failed to handle server sent message!');
       console.error('server sent:')
