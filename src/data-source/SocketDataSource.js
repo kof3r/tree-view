@@ -1,7 +1,9 @@
 
-import { setRootNode, shiftSelectedPath, toggleExpandedPath } from '../state/file-system';
+import { fileSystemActions } from '../state/file-system';
 
 import { DataSource } from './DataSource';
+
+const { setRootNode, shiftSelectedPath, toggleExpandedPath } = fileSystemActions;
 
 export class SocketDataSource extends DataSource {
   constructor(dispatch, wsUrl) {

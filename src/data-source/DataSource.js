@@ -1,5 +1,7 @@
 
-import { setRootNode } from '../state/file-system';
+import { fileSystemActions } from '../state/file-system';
+
+const { setRootNode } = fileSystemActions;
 
 export class DataSource {
   constructor(dispatch) {

@@ -1,6 +1,8 @@
 
 import store from '../store';
-import { setRootNode } from '../state/file-system'
+import { fileSystemActions } from '../state/file-system'
+
+const { setRootNode } = fileSystemActions;
 
 const ws = new WebSocket('ws://localhost:10000/tv-backend/ws');
 
