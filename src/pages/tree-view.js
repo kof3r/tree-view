@@ -4,41 +4,24 @@ import { connect } from 'react-redux';
 
 import { SplitLayout } from '../layouts';
 import { fileSystemActions, fileSystemSelectors } from '../state/file-system';
-import { TreeView, DetailView, resolveNodeRenderer, resolveNodeDetailViewRenderer } from '../components';
+import { resolveNodeRenderer, resolveNodeDetailViewRenderer } from '../components';
+import { createConnectedTreeView, createDetailViewConnected } from '../component-factories';
 import { SocketDataSource, HttpDataSource } from '../data-source';
 import store from '../store';
 
 import fileSystemMock from '../test_data/file-system.json';
 
-const {
-  moveNode,
-  removeNode,
-  selectPath,
-  shiftSelectedPath,
-  toggleExpandedPath,
-} = fileSystemActions;
+const TreeViewConnected = createConnectedTreeView({
+  actions: fileSystemActions,
+  selectors: fileSystemSelectors,
+  resolveNodeComponent: resolveNodeRenderer,
+});
 
-const {
-  $expandedPaths,
-  $isPathExpanded,
-  $root,
-  $selectedNode,
-  $selectedPath,
-} = fileSystemSelectors;
-
-const TreeViewConnected = connect(
-  state => ({
-    node: $root(state),
-    isPathExpanded: $isPathExpanded(state),
-    selectedPath: $selectedPath(state),
-  }),
-  { moveNode, removeNode, toggleExpandedPath, selectPath, shiftSelectedPath },
-)(props => <TreeView resolveNodeRenderer={resolveNodeRenderer} {...props}/>);
-
-
-const DetailViewConnected = connect(
-  state => ({ node: $selectedNode(state) }),
-)(props => <DetailView {...props} resolveNodeRenderer={resolveNodeDetailViewRenderer} resolveNodeTitleRenderer={resolveNodeRenderer}/>);
+const DetailViewConnected = createDetailViewConnected({
+  selectors: fileSystemSelectors,
+  resolveNodeComponent: resolveNodeDetailViewRenderer,
+  resolveNodeTitleComponent: resolveNodeRenderer,
+});
 
 export class TreeViewPage extends Component {
   componentDidMount() {
