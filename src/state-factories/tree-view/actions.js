@@ -1,15 +1,15 @@
 
 import { pathString } from 'util.lib/path';
 
-export const REMOVE_NODE = 'REMOVE_NODE';
-export const MOVE_NODE = 'MOVE_NODE';
-export const TOGGLE_EXPANDED_PATH = 'TOGGLE_EXPANDED_NODE';
-export const SELECT_PATH = 'SELECT_PATH';
-export const SET_ROOT_NODE = 'SET_ROOT_NODE';
+export const REMOVE_NODE = 'removeNode';
+export const MOVE_NODE = 'moveNode';
+export const TOGGLE_EXPANDED_PATH = 'toggleExpandedNode';
+export const SELECT_PATH = 'selectPath';
+export const SET_ROOT_NODE = 'setRootNode';
 
 export function createTreeViewActions(prefix, selectors) {
   const { $indexPathMap, $pathIndexMap, $selectedPath, $root } = selectors;
-  const pfx = action => `${prefix}_${action}`;
+  const pfx = action => `${prefix}:${action}`;
 
   const setRootNode = node => ({ type: pfx(SET_ROOT_NODE), payload: node });
   const moveNode = (source, destination) => ({ type: pfx(MOVE_NODE), payload: { source, destination } });

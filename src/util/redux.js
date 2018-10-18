@@ -8,7 +8,7 @@ export function createReducer(actionHandlers = {}, defaultState = null) {
 export function createPrefixedReducer(prefix, actionHandlers = {}, defaultState) {
   const prefixedActionHandlers = {};
   for (const action of Object.keys(actionHandlers)) {
-    prefixedActionHandlers[`${prefix}_${action}`] = actionHandlers[action];
+    prefixedActionHandlers[`${prefix}:${action}`] = actionHandlers[action];
   }
   return createReducer(prefixedActionHandlers, defaultState);
 }
