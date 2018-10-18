@@ -45,13 +45,15 @@ export class TreeViewPage extends Component {
     let url = fileSystemMock;
     let DataSource = HttpDataSource;
     const { DATA_SOURCE } = process.env;
-    const protocol = DATA_SOURCE.split('://')[0];
-    if (protocol === 'http') {
-      DataSource = HttpDataSource;
-      url = DATA_SOURCE;
-    } else if(protocol === 'ws') {
-      DataSource = SocketDataSource;
-      url = DATA_SOURCE;
+    if (DATA_SOURCE) {
+      const protocol = DATA_SOURCE.split('://')[0];
+      if (protocol === 'http') {
+        DataSource = HttpDataSource;
+        url = DATA_SOURCE;
+      } else if(protocol === 'ws') {
+        DataSource = SocketDataSource;
+        url = DATA_SOURCE;
+      }
     }
     const dataSource = new DataSource(store.dispatch, url);
     dataSource.connect();
