@@ -1,8 +1,8 @@
 
 import { parseNodeTree } from '../../../parser';
 import { pathContainsPath } from 'util.lib/path';
-import { _MOVE_NODE, _REMOVE_NODE, _SET_ROOT_NODE } from '../actions';
-import { createReducer } from 'util.lib/redux';
+import { MOVE_NODE, REMOVE_NODE, SET_ROOT_NODE } from '../actions';
+import { createPrefixedReducer } from 'util.lib/redux';
 
 function findNode(tree, path) {
   const [_, ...rest] = path;
@@ -49,11 +49,12 @@ function moveNode(tree, { source, destination }) {
 }
 
 export function createTreeReducer(prefix, defaultState) {
-  return createReducer(
+  return createPrefixedReducer(
+    prefix,
     {
-      [`${prefix}${_MOVE_NODE}`]: moveNode,
-      [`${prefix}${_REMOVE_NODE}`]: removeNode,
-      [`${prefix}${_SET_ROOT_NODE}`]: setRootNode,
+      [MOVE_NODE]: moveNode,
+      [REMOVE_NODE]: removeNode,
+      [SET_ROOT_NODE]: setRootNode,
     },
     defaultState,
   );

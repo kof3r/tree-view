@@ -1,11 +1,10 @@
 
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 
 import { SplitLayout } from '../layouts';
 import { fileSystemActions, fileSystemSelectors } from '../state/file-system';
 import { resolveNodeRenderer, resolveNodeDetailViewRenderer } from '../components';
-import { createConnectedTreeView, createDetailViewConnected } from '../component-factories';
+import { createConnectedTreeView, createConnectedDetailView } from '../component-factories';
 import { SocketDataSource, HttpDataSource } from '../data-source';
 import store from '../store';
 
@@ -17,7 +16,7 @@ const TreeViewConnected = createConnectedTreeView({
   resolveNodeComponent: resolveNodeRenderer,
 });
 
-const DetailViewConnected = createDetailViewConnected({
+const DetailViewConnected = createConnectedDetailView({
   selectors: fileSystemSelectors,
   resolveNodeComponent: resolveNodeDetailViewRenderer,
   resolveNodeTitleComponent: resolveNodeRenderer,

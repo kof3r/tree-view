@@ -5,6 +5,18 @@ export function createReducer(actionHandlers = {}, defaultState = null) {
   }
 }
 
+export function createPrefixedReducer(prefix, actionHandlers = {}, defaultState) {
+  const prefixedActionHandlers = {};
+  for (const action of Object.keys(actionHandlers)) {
+    prefixedActionHandlers[`${prefix}_${action}`] = actionHandlers[action];
+  }
+  return createReducer(prefixedActionHandlers, defaultState);
+}
+
+export function withShallowStateCopy(reducer) {
+  return (state, payload) => reducer({ ...state }, payload);
+}
+
 export function createAction(type) {
   return payload => ({ type, payload });
 }

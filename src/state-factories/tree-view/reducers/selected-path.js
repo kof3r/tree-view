@@ -1,16 +1,17 @@
 
-import { createReducer } from 'util.lib/redux';
+import { createPrefixedReducer } from 'util.lib/redux';
 
-import { _SELECT_PATH } from '../actions';
+import { SELECT_PATH } from '../actions';
 
 function selectPath(_, payload) {
   return payload;
 }
 
 export function createSelectedPathReducer(prefix) {
-  return createReducer(
+  return createPrefixedReducer(
+    prefix,
     {
-      [`${prefix}${_SELECT_PATH}`]: selectPath,
+      [SELECT_PATH]: selectPath,
     },
     null,
   );

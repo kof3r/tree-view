@@ -1,23 +1,20 @@
 
-import { createReducer } from 'util.lib/redux'
+import { createPrefixedReducer, withShallowStateCopy } from 'util.lib/redux'
 import { pathString } from 'util.lib/path';
-import { _TOGGLE_EXPANDED_PATH } from '../actions';
+import { TOGGLE_EXPANDED_PATH } from '../actions';
 
 function toggleExpandedNode(state, path) {
   const p = pathString(path);
-  const nextState = { ...state };
-  if (p in state) {
-    delete nextState[p];
-  } else {
-    nextState[p] = true;
-  }
-  return nextState;
+  if (p in state) delete state[p];
+  else state[p] = true;
+  return state;
 }
 
 export function createExpandedPathsReducer(prefix, defaultState) {
-  return createReducer(
+  return createPrefixedReducer(
+    prefix,
     {
-      [`${prefix}${_TOGGLE_EXPANDED_PATH}`]: toggleExpandedNode,
+      [TOGGLE_EXPANDED_PATH]: withShallowStateCopy(toggleExpandedNode),
     },
     defaultState,
   );
