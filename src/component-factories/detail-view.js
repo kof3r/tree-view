@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { DetailView } from '../components';
 
-export function createConnectedDetailView({ selectors, resolveNodeComponent, resolveNodeTitleComponent }) {
+export function createConnectedDetailView({ selectors, resolveNodeComponent }) {
   const { $selectedNode } = selectors;
 
   const mapStateToProps = state => ({ node: $selectedNode(state) });
@@ -12,7 +12,6 @@ export function createConnectedDetailView({ selectors, resolveNodeComponent, res
     <DetailView
       {...props}
       resolveNodeRenderer={resolveNodeComponent}
-      resolveNodeTitleRenderer={resolveNodeTitleComponent}
     />
   ));
 }

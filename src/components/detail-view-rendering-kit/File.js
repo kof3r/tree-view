@@ -1,5 +1,6 @@
 
 import React, { Component } from 'react';
+import { resolveNodeRenderer } from '..';
 import * as fileRenderingKit from './file-rendering-kit';
 
 export class File extends Component {
@@ -29,12 +30,12 @@ export class File extends Component {
     return '';
   }
   render() {
-    const { resolveNodeTitleRenderer, node } = this.props;
+    const { node } = this.props;
     if (node.fileType in fileRenderingKit) {
       const Content = fileRenderingKit[node.fileType];
       return <Content content={this.content}/>
     }
-    const Title = resolveNodeTitleRenderer(node);
+    const Title = resolveNodeRenderer(node);
     return <Title node={node}/>
   }
 }

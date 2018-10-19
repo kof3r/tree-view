@@ -6,9 +6,9 @@ import './DetailView.scss';
 
 export class DetailView extends PureComponent {
   renderNodeDetailView() {
-    const { node, resolveNodeRenderer, resolveNodeTitleRenderer } = this.props;
+    const { node, resolveNodeRenderer } = this.props;
     const NodeDetailView = resolveNodeRenderer(node)
-    return <NodeDetailView node={node} resolveNodeTitleRenderer={resolveNodeTitleRenderer}/>;
+    return <NodeDetailView node={node}/>;
   }
   get className() {
     return classnames('DetailView', this.props.node.type);

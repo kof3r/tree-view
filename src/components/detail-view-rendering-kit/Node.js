@@ -1,10 +1,11 @@
 
 import React, { PureComponent } from 'react';
+import { resolveNodeRenderer } from '..';
 
 export class Node extends PureComponent {
   renderNodeTitle() {
-    const { node, resolveNodeTitleRenderer } = this.props;
-    const NodeTitle = resolveNodeTitleRenderer(node)
+    const { node } = this.props;
+    const NodeTitle = resolveNodeRenderer(node)
     return <NodeTitle node={node}/>
   }
   render() {
