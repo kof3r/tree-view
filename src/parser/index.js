@@ -1,8 +1,6 @@
 
 import uuid from 'uuid';
 
-import { createNodeModel } from '../models';
-
 export function parseNodeTree(rootNode) {
   const node = {
     ...rootNode,
@@ -19,15 +17,16 @@ export function parseNodeTree(rootNode) {
   return node;
 }
 
-export function modelNodeTree(rootNode) {
-  const node = { ...rootNode };
-  node.data = JSON.parse(JSON.stringify(node.data))
-  if (node.children) {
-    const modeledChildren = {};
-    Object.keys(node.children).forEach(id => {
-      modeledChildren[id] = modelNodeTree(node.children[id])
-    });
-    node.children = modeledChildren;
+export function createNodeTreeModeler(createNodeModel) {
+  return function modelNodeTree(rawNode) {
+    const node = { ...rawNode };
+    if (node.children) {
+      const modeledChildren = {};
+      Object.keys(node.children).forEach(id => {
+        modeledChildren[id] = modelNodeTree(node.children[id])
+      });
+      node.children = modeledChildren;
+    }
+    return createNodeModel(node);
   }
-  return createNodeModel(node);
 }

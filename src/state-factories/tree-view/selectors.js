@@ -2,7 +2,7 @@
 import { createSelector } from 'reselect';
 import { pathString } from 'util.lib/path';
 import { createStaticSelector } from 'util.lib/redux';
-import { modelNodeTree } from '../../parser';
+import { createNodeTreeModeler } from '../../parser';
 
 function buildIndexPathMap(pathPrefix, node, expandedNodes) {
   const path = [...pathPrefix, node.id];
@@ -18,12 +18,13 @@ function buildIndexPathMap(pathPrefix, node, expandedNodes) {
   return pathMap;
 }
 
-export function createTreeViewSelectors(statePath) {
+export function createTreeViewSelectors(statePath, nodeModelCreator) {
   const resolvePath = path => `${statePath}.${path}`;
   
   const $tree = createStaticSelector(resolvePath('tree'));
   const $expandedPaths = createStaticSelector(resolvePath('expandedPaths'));
   const $selectedPath = createStaticSelector(resolvePath('selectedPath'));
+  const modelNodeTree = nodeModelCreator ? createNodeTreeModeler(nodeModelCreator) : (node => node);
   const $root = createSelector(
     $tree,
     tree => tree ? modelNodeTree(tree) : null
