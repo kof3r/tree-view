@@ -1,11 +1,12 @@
 {
   "type": "Directory",
-  "id": "custom-root-id",
+  "id": "root",
   "label": "root",
   "children": [
     {
       "type": "Directory",
       "label": "home",
+      "id": "home",
       "children": [
         {
           "type": "Directory",
@@ -34,6 +35,7 @@
         {
           "type": "Directory",
           "label": "ljubo",
+          "id": "ljubo",
           "children": [
             { "type": "File", "label": "ljubo.jpg", "data": { "type": "jpg", "content": "https://avatars2.githubusercontent.com/u/864692?s=460&v=4" } },
             { "type": "File", "label": "main.go", "data": { "type": "go" } },
@@ -55,6 +57,7 @@
             {
               "type": "Device",
               "label": "My USB",
+              "id": "my-usb",
               "data": { "connected": false },
               "children": [
                 { "type": "File", "label": "wallpaper.jpg", "data": { "type": "jpg" } }

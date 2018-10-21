@@ -1,5 +1,6 @@
 
-import { setRootNode, shiftSelectedPath, toggleExpandedPath } from '../state/file-system';
+import { addNode, setRootNode, shiftSelectedPath, toggleExpandedPath, updateNodeData } from '../state/file-system';
+import { parseNodeTree } from '../parser';
 
 import { DataSource } from './DataSource';
 
@@ -10,10 +11,12 @@ export class SocketDataSource extends DataSource {
     this.wsUrl = wsUrl;
     this.ws = null;
     this.messageHandlers = {
+      'AddNode': ({ path, node }) => dispatch(addNode(path, parseNodeTree(node))),
       'SetContent': root => dispatch(setRootNode(root)),
       'SelectNextNode': () => dispatch(shiftSelectedPath(1)),
       'SelectPreviousNode': () => dispatch(shiftSelectedPath(-1)),
       'ToggleSelectedNodeExpand': () => dispatch(toggleExpandedPath()),
+      'UpdateNodeData': ({ path, data }) => dispatch(updateNodeData(path, data)),
     }
   }
   connect() {

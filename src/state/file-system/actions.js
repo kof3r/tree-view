@@ -1,10 +1,14 @@
 
-import { MOVE_NODE, REMOVE_NODE, TOGGLE_EXPANDED_PATH, SELECT_PATH, SET_ROOT_NODE } from '../actions';
+import { ADD_NODE, MOVE_NODE, REMOVE_NODE, TOGGLE_EXPANDED_PATH, SELECT_PATH, SET_ROOT_NODE, UPDATE_NODE_DATA } from '../actions';
 import { $indexPathMap, $pathIndexMap, $selectedPath, $root } from './selectors';
 import { pathString } from 'util.lib/path';
 
 export function setRootNode(node) {
   return { type: SET_ROOT_NODE, payload: node };
+}
+
+export function addNode(path, node) {
+  return { type: ADD_NODE, payload: { path, node } };
 }
 
 export function moveNode(source, destination) {
@@ -52,4 +56,8 @@ export function shiftSelectedPath(direction) {
       dispatch(selectPath([root.id]));
     }
   }
+}
+
+export function updateNodeData(path, data) {
+  return { type: UPDATE_NODE_DATA, payload: { path, data } };
 }
