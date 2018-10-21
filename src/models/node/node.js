@@ -38,4 +38,8 @@ export class Node {
   get name() {
     return this.label !== undefined ? this.label : this.id;
   }
+
+  get isActive() {
+    return true;
+  }
 }

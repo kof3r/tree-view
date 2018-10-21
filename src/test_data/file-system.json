@@ -53,6 +53,14 @@
               ]
             },
             {
+              "type": "Device",
+              "label": "My USB",
+              "data": { "connected": false },
+              "children": [
+                { "type": "File", "label": "wallpaper.jpg", "data": { "type": "jpg" } }
+              ]
+            },
+            {
               "type": "MachineCluster",
               "label": "aws-cluster",
               "children": [

@@ -68,6 +68,14 @@
       border-color: transparentize($color-selected, 0.5);
     }
   }
+
+  &.inactive {
+    .Node {
+      .name, .icon {
+        opacity: 0.5;
+      }
+    }
+  }
 }
 
 .TreeViewContainer {

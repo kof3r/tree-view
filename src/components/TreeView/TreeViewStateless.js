@@ -84,7 +84,7 @@ export class TreeViewStateless extends Component {
     );
   }
   get className() {
-    const { className, highlightedPath, selectedPath } = this.props;
+    const { className, highlightedPath, selectedPath, node } = this.props;
     return classnames(
       'TreeView',
       className,
@@ -92,6 +92,7 @@ export class TreeViewStateless extends Component {
         'expandable': this.hasChildren,
         'highlighted': highlightedPath && this.equalPath(highlightedPath),
         'selected': selectedPath && this.equalPath(selectedPath),
+        'inactive': !node.isActive,
       }
     )
   }
